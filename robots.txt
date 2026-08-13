@@ -1,0 +1,7 @@
+# N3Rah Tech - Robots.txt for Vercel Hosting
+User-agent: *
+Allow: /
+
+# Host & Sitemap
+Host: https://n3rah.vercel.app
+Sitemap: https://n3rah.vercel.app/sitemap.xml
