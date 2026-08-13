@@ -42,23 +42,26 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ── 3D Card Tilt Effect ── */
-  const tiltCards = document.querySelectorAll('.tilt-card');
-  tiltCards.forEach(card => {
-    card.addEventListener('mousemove', e => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const rotateX = ((y - centerY) / centerY) * -8;
-      const rotateY = ((x - centerX) / centerX) * 8;
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
-    });
+  const isTouchDevice = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768;
+  if (!isTouchDevice) {
+    const tiltCards = document.querySelectorAll('.tilt-card');
+    tiltCards.forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -8;
+        const rotateY = ((x - centerX) / centerX) * 8;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+      });
 
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+      });
     });
-  });
+  }
 
   /* ── Particles Canvas ── */
   const canvas = document.getElementById('particles');
@@ -96,7 +99,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    for (let i = 0; i < 65; i++) particles.push(new Particle());
+    const particleCount = window.innerWidth < 768 ? 28 : 60;
+    for (let i = 0; i < particleCount; i++) particles.push(new Particle());
 
     function drawParticles() {
       ctx.clearRect(0, 0, W, H);
@@ -143,20 +147,45 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ── Hamburger Menu ── */
   const hamburger = document.getElementById('hamburger');
   const navLinks  = document.getElementById('navLinks');
+
+  function closeMobileNav() {
+    if (!navLinks) return;
+    navLinks.classList.remove('open');
+    document.body.classList.remove('nav-open');
+    if (hamburger) {
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+    }
+  }
+
   if (hamburger && navLinks) {
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
+    hamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = navLinks.classList.toggle('open');
+      document.body.classList.toggle('nav-open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       const spans = hamburger.querySelectorAll('span');
-      const isOpen = navLinks.classList.contains('open');
       spans[0].style.transform = isOpen ? 'translateY(7px) rotate(45deg)' : '';
       spans[1].style.opacity   = isOpen ? '0' : '';
       spans[2].style.transform = isOpen ? 'translateY(-7px) rotate(-45deg)' : '';
     });
-    navLinks.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-        hamburger.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+
+    navLinks.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('click', () => {
+        closeMobileNav();
       });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (navLinks.classList.contains('open') && !navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+        closeMobileNav();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768 && navLinks.classList.contains('open')) {
+        closeMobileNav();
+      }
     });
   }
 
@@ -428,13 +457,62 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  /* ── Cyber Security & Sanitization Suite ── */
+  const formLoadTime = Date.now();
+  const csrfTokenInput = document.getElementById('csrfToken');
+  const generatedCsrf = 'csrf_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+  if (csrfTokenInput) csrfTokenInput.value = generatedCsrf;
+
+  function sanitizeHTML(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#x27;')
+      .replace(/\//g, '&#x2F;');
+  }
+
+  function detectInjectionPayload(str) {
+    if (!str) return false;
+    const lower = str.toLowerCase();
+    const maliciousPatterns = [
+      /<script/i,
+      /javascript:/i,
+      /vbscript:/i,
+      /onerror\s*=/i,
+      /onload\s*=/i,
+      /onclick\s*=/i,
+      /eval\s*\(/i,
+      /expression\s*\(/i,
+      /union\s+select/i,
+      /drop\s+table/i,
+      /insert\s+into/i,
+      /delete\s+from/i,
+      /<\?php/i,
+      /exec\s*\(/i,
+      /system\s*\(/i
+    ];
+    return maliciousPatterns.some(pattern => pattern.test(lower));
+  }
+
+  function isValidEmail(email) {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
+  }
+
   /* ── Toast Notification System ── */
-  function showToast(message) {
+  function showToast(message, isError = false) {
     const container = document.getElementById('toastContainer');
     if (!container) return;
     const toast = document.createElement('div');
     toast.className = 'toast';
-    toast.innerHTML = `<span>✅</span> ${message}`;
+    if (isError) {
+      toast.style.borderColor = '#ef4444';
+      toast.style.background = 'rgba(24, 11, 15, 0.96)';
+    }
+    toast.innerHTML = `<span>${isError ? '🛡️' : '✅'}</span> ${message}`;
     container.appendChild(toast);
     setTimeout(() => {
       toast.style.opacity = '0';
@@ -443,23 +521,83 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 4500);
   }
 
-  /* ── Contact Form ── */
+  /* ── Contact Form Cyber Security Handler ── */
   const form      = document.getElementById('contactForm');
   const submitBtn = document.getElementById('submitBtn');
 
   if (form) {
     form.addEventListener('submit', e => {
       e.preventDefault();
-      const name    = form.name.value.trim();
-      const email   = form.email.value.trim();
-      const subject = form.subject ? form.subject.value : 'General';
-      const message = form.message.value.trim();
 
-      if (!name || !email || !message) {
-        showToast('Please fill out all required fields.');
+      // 1. Honeypot Bot Trap Check
+      const hpVal = form._website_hp_check ? form._website_hp_check.value : '';
+      if (hpVal) {
+        // Silent rejection for automated spam bots
+        showToast('Submission processed successfully.');
+        form.reset();
         return;
       }
 
+      // 2. Time-on-Page Bot Execution Check (< 1.8 seconds is bot behavior)
+      const timeElapsed = Date.now() - formLoadTime;
+      if (timeElapsed < 1800) {
+        showToast('Security Violation: Automated bot submission detected.', true);
+        return;
+      }
+
+      // 3. Client Rate Limiting (60 Seconds Cooldown)
+      const lastSubmit = localStorage.getItem('n3rah_last_contact_submit');
+      if (lastSubmit) {
+        const timeSince = Date.now() - parseInt(lastSubmit, 10);
+        if (timeSince < 60000) {
+          const remainingSecs = Math.ceil((60000 - timeSince) / 1000);
+          showToast(`Security Rate Limit: Please wait ${remainingSecs}s before submitting again.`, true);
+          return;
+        }
+      }
+
+      // 4. Raw Input Extraction
+      const rawName    = form.name.value.trim();
+      const rawEmail   = form.email.value.trim();
+      const rawSubject = form.subject ? form.subject.value : 'General';
+      const rawBudget  = form.budget ? form.budget.value : 'Not specified';
+      const rawMessage = form.message.value.trim();
+
+      // 5. Empty Fields Check
+      if (!rawName || !rawEmail || !rawMessage) {
+        showToast('Please fill out all required fields.', true);
+        return;
+      }
+
+      // 6. Email Format Validation
+      if (!isValidEmail(rawEmail)) {
+        showToast('Security Alert: Please provide a valid email address.', true);
+        return;
+      }
+
+      // 7. Malicious Payload / Script Injection Detection
+      if (detectInjectionPayload(rawName) || detectInjectionPayload(rawEmail) || detectInjectionPayload(rawMessage)) {
+        showToast('Security Alert: Malicious code/script injection payload detected and blocked.', true);
+        return;
+      }
+
+      // 8. Input Sanitization
+      const cleanName    = sanitizeHTML(rawName);
+      const cleanEmail   = sanitizeHTML(rawEmail);
+      const cleanSubject = sanitizeHTML(rawSubject);
+      const cleanBudget  = sanitizeHTML(rawBudget);
+      const cleanMessage = sanitizeHTML(rawMessage);
+
+      // Disable button to prevent double-submit attacks
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.querySelector('span').textContent = 'Encrypting & Sending...';
+      }
+
+      // Store Rate Limit Timestamp
+      localStorage.setItem('n3rah_last_contact_submit', Date.now().toString());
+
+      // Secure API Request
       fetch('https://formsubmit.co/ajax/n3rah.tech3@gmail.com', {
         method: 'POST',
         headers: {
@@ -467,24 +605,26 @@ document.addEventListener('DOMContentLoaded', () => {
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          name: name,
-          email: email,
-          category: subject || 'General Software / Web',
-          budget: form.budget ? form.budget.value : 'Not specified',
-          message: message,
-          _subject: `New N3Rah Tech Inquiry from ${name}`
+          name: cleanName,
+          email: cleanEmail,
+          category: cleanSubject || 'General Software / Web',
+          budget: cleanBudget,
+          message: cleanMessage,
+          _subject: `Secured N3Rah Tech Inquiry from ${cleanName}`,
+          _captcha: 'true',
+          _template: 'table'
         })
       })
       .then(res => res.json())
       .then(data => {
-        showToast('Proposal request sent! We will email you back within 24h.');
+        showToast('Proposal request encrypted & sent! We will email you back within 24h.');
         form.reset();
       })
       .catch(err => {
-        const sub = encodeURIComponent(`N3Rah Project Inquiry: ${subject || 'Software / Web'}`);
-        const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nCategory: ${subject}\n\nProject Details:\n${message}`);
+        const sub = encodeURIComponent(`N3Rah Project Inquiry: ${cleanSubject}`);
+        const body = encodeURIComponent(`Name: ${cleanName}\nEmail: ${cleanEmail}\nCategory: ${cleanSubject}\n\nProject Details:\n${cleanMessage}`);
         window.location.href = `mailto:n3rah.tech3@gmail.com?subject=${sub}&body=${body}`;
-        showToast('Opening mail app to send inquiry...');
+        showToast('Opening secure mail app to complete inquiry...');
       })
       .finally(() => {
         if (submitBtn) {
