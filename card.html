@@ -7,10 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     
     <!-- Primary SEO Meta Tags -->
-    <title>Rahul Mishra – Founder & Lead Software Architect | N3Rah Tech Digital Card</title>
-    <meta name="title" content="Rahul Mishra – Founder & Lead Software Architect | N3Rah Tech Digital Card" />
-    <meta name="description" content="Official Digital NFC & QR Business Card for Rahul Mishra, Founder & Lead Software Architect at N3Rah Tech. Save contact, scan QR codes, or tap NFC tags." />
-    <meta name="author" content="Rahul Mishra - N3Rah Tech" />
+    <title>N3Rah Tech – Executive Digital NFC & QR Cards | Rahul Mishra & Vaibhaw Mishra</title>
+    <meta name="title" content="N3Rah Tech – Executive Digital NFC & QR Cards | Rahul Mishra & Vaibhaw Mishra" />
+    <meta name="description" content="Official Digital NFC & QR Business Cards for Rahul Mishra (Founder) and Vaibhaw Mishra (Co-Founder) at N3Rah Tech. Save contact, scan QR codes, or tap NFC tags." />
+    <meta name="author" content="N3Rah Tech Studio" />
+    <meta name="google-site-verification" content="google3bcdc46d6ee95f5e" />
     <meta name="theme-color" content="#030712" />
 
     <!-- Favicon -->
@@ -19,8 +20,8 @@
 
     <!-- Open Graph / Social Tags -->
     <meta property="og:type" content="profile" />
-    <meta property="og:title" content="Rahul Mishra – Founder & Lead Software Architect | N3Rah Tech" />
-    <meta property="og:description" content="Connect with Rahul Mishra, Founder & Lead Software Architect at N3Rah Tech Studio. Tap NFC or scan QR to connect instantly." />
+    <meta property="og:title" content="N3Rah Tech Executive Digital NFC & QR Cards" />
+    <meta property="og:description" content="Connect with Rahul Mishra (Founder & Lead Architect) and Vaibhaw Mishra (Lead Developer & Co-Founder) at N3Rah Tech. Tap NFC or scan QR to connect instantly." />
     <meta property="og:image" content="https://n3rah.vercel.app/assets/logo.jpg" />
 
     <!-- Google Fonts -->
@@ -34,21 +35,38 @@
     <!-- QRCode JS CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-    <!-- Structured Data (JSON-LD Schema for Founder) -->
+    <!-- Structured Data (JSON-LD Schema for Founders) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Rahul Mishra",
-      "jobTitle": "Founder & Lead Software Architect",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "N3Rah Tech",
-        "url": "https://n3rah.vercel.app/"
-      },
-      "url": "https://n3rah.vercel.app/card.html",
-      "email": "n3rah.tech3@gmail.com",
-      "telephone": "+918791104601"
+      "@graph": [
+        {
+          "@type": "Person",
+          "name": "Rahul Mishra",
+          "jobTitle": "Founder & Lead Software Architect",
+          "worksFor": {
+            "@type": "Organization",
+            "name": "N3Rah Tech",
+            "url": "https://n3rah.vercel.app/"
+          },
+          "url": "https://n3rah.vercel.app/card.html?profile=rahul",
+          "email": "n3rah.tech3@gmail.com",
+          "telephone": "+918791104601"
+        },
+        {
+          "@type": "Person",
+          "name": "Vaibhaw Mishra",
+          "jobTitle": "Lead Developer & Co-Founder",
+          "worksFor": {
+            "@type": "Organization",
+            "name": "N3Rah Tech",
+            "url": "https://n3rah.vercel.app/"
+          },
+          "url": "https://n3rah.vercel.app/card.html?profile=vaibhaw",
+          "email": "n3rah.tech3@gmail.com",
+          "telephone": "+918931899566"
+        }
+      ]
     }
     </script>
 
@@ -80,7 +98,7 @@
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .back-home-btn {
@@ -101,6 +119,66 @@
             color: var(--text-primary);
             border-color: var(--accent);
             background: rgba(99, 102, 241, 0.12);
+        }
+
+        /* Executive Profile Selector Tabs */
+        .profile-tabs-wrapper {
+            width: 100%;
+            margin-bottom: 1.25rem;
+        }
+
+        .profile-tabs {
+            display: flex;
+            gap: 0.4rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            padding: 5px;
+            border-radius: 100px;
+            backdrop-filter: blur(16px);
+        }
+
+        body.light .profile-tabs {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .profile-tab {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 0.75rem;
+            border-radius: 100px;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .profile-tab:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .profile-tab.active {
+            background: var(--gradient);
+            color: #ffffff;
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+        }
+
+        .tab-role-badge {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            opacity: 0.85;
+            font-weight: 700;
+            margin-bottom: 1px;
+        }
+
+        .tab-name-title {
+            font-size: 0.84rem;
+            font-weight: 700;
         }
 
         /* 3D Flip Card Container */
@@ -176,6 +254,21 @@
             box-shadow: 0 2px 10px rgba(245, 158, 11, 0.4);
         }
 
+        .cofounder-tag-badge {
+            position: absolute;
+            top: -4px;
+            right: -8px;
+            background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #6366f1 100%);
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 2px 8px;
+            border-radius: 100px;
+            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.4);
+        }
+
         .nfc-badge {
             position: absolute;
             bottom: -4px;
@@ -212,12 +305,23 @@
         .card-company {
             font-size: 0.84rem;
             color: var(--text-secondary);
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
             gap: 0.4rem;
             justify-content: center;
             font-weight: 600;
+        }
+
+        .card-tagline {
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 1.25rem;
+            line-height: 1.35;
+            opacity: 0.9;
         }
 
         /* Main Contact Actions Grid */
@@ -247,6 +351,25 @@
             background: rgba(99, 102, 241, 0.12);
             border-color: var(--accent);
             transform: translateY(-2px);
+        }
+
+        .action-tile.tile-full-width {
+            grid-column: span 2;
+            flex-direction: row;
+            gap: 0.6rem;
+            padding: 0.85rem 1rem;
+        }
+
+        .action-tile.tile-full-width .action-icon {
+            margin-bottom: 0;
+            font-size: 1.25rem;
+        }
+
+        .action-tile.tile-full-width .action-text-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
         }
 
         .action-icon {
@@ -392,15 +515,34 @@
         
         <!-- Header Bar -->
         <div class="card-header-bar">
-            <a href="index.html" class="back-home-btn" aria-label="Return to N3Rah Homepage">
-                <span>←</span> Company Site
-            </a>
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <a href="index.html" class="back-home-btn" aria-label="Return to N3Rah Homepage">
+                    <span>←</span> Home
+                </a>
+                <a href="team.html" class="back-home-btn" aria-label="View N3Rah Leadership & Team">
+                    <span>👥</span> Team
+                </a>
+            </div>
 
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme Dark or Light" title="Toggle theme">
                 <span class="theme-icon theme-icon-dark">🌙</span>
                 <span class="theme-icon theme-icon-light">☀️</span>
                 <span class="theme-toggle-label">Dark</span>
             </button>
+        </div>
+
+        <!-- Executive Profile Selector Tabs -->
+        <div class="profile-tabs-wrapper">
+            <div class="profile-tabs" role="tablist" aria-label="Select Executive NFC Card Profile">
+                <button class="profile-tab active" id="tabRahul" data-profile="rahul" role="tab" aria-selected="true" title="View Rahul Mishra NFC Card">
+                    <span class="tab-role-badge">Founder</span>
+                    <span class="tab-name-title">Rahul Mishra</span>
+                </button>
+                <button class="profile-tab" id="tabVaibhaw" data-profile="vaibhaw" role="tab" aria-selected="false" title="View Vaibhaw Mishra NFC Card">
+                    <span class="tab-role-badge">Co-Founder</span>
+                    <span class="tab-name-title">Vaibhaw Mishra</span>
+                </button>
+            </div>
         </div>
 
         <!-- 3D Flip Card Inner -->
@@ -410,47 +552,26 @@
             <div class="card-face card-face-front">
                 
                 <div class="card-avatar-wrap">
-                    <img src="assets/logo.jpg" alt="Rahul Mishra - Founder & Lead Software Architect" class="card-avatar" />
-                    <span class="founder-tag-badge">Founder</span>
+                    <img src="assets/logo.jpg" alt="N3Rah Tech Logo Emblem" class="card-avatar" />
+                    <span class="founder-tag-badge" id="cardBadge">Founder</span>
                     <span class="nfc-badge"><span>📡</span> NFC</span>
                 </div>
 
-                <h1 class="card-name">Rahul Mishra</h1>
-                <div class="card-title">Founder & Lead Software Architect</div>
-                <div class="card-company">
+                <h1 class="card-name" id="cardName">Rahul Mishra</h1>
+                <div class="card-title" id="cardTitle">Founder & Lead Software Architect</div>
+                <div class="card-company" id="cardCompany">
                     <span>🏢</span> N3Rah Tech Studio
                 </div>
+                <div class="card-tagline" id="cardTagline">INNOVATING THE FUTURE, CONNECTING THE WORLD</div>
 
-                <!-- 4 Quick Actions -->
-                <div class="card-actions-grid">
-                    <a href="tel:+918791104601" class="action-tile" aria-label="Call Rahul Mishra Direct">
-                        <span class="action-icon">📞</span>
-                        <span class="action-label">Call</span>
-                        <span class="action-sub">+91 87911 04601</span>
-                    </a>
-
-                    <a href="https://wa.me/918791104601?text=Hi%20Rahul!%20I%20scanned%20your%20N3Rah%20NFC/QR%20card." target="_blank" rel="noopener" class="action-tile" aria-label="WhatsApp Rahul Mishra Direct">
-                        <span class="action-icon">💬</span>
-                        <span class="action-label">WhatsApp</span>
-                        <span class="action-sub">Chat Direct</span>
-                    </a>
-
-                    <a href="mailto:n3rah.tech3@gmail.com" class="action-tile" aria-label="Email Rahul Mishra Direct">
-                        <span class="action-icon">📧</span>
-                        <span class="action-label">Email</span>
-                        <span class="action-sub">Send Inquiry</span>
-                    </a>
-
-                    <a href="index.html" class="action-tile" aria-label="Visit N3Rah Main Website">
-                        <span class="action-icon">🌐</span>
-                        <span class="action-label">Website</span>
-                        <span class="action-sub">n3rah.vercel.app</span>
-                    </a>
+                <!-- Contact Actions Grid -->
+                <div class="card-actions-grid" id="cardActionsGrid">
+                    <!-- Populated dynamically via JS -->
                 </div>
 
                 <!-- Primary Action Buttons -->
                 <div class="primary-card-buttons">
-                    <button class="btn-vcard" id="downloadVCardBtn" aria-label="Save Rahul Mishra Contact to Phone">
+                    <button class="btn-vcard" id="downloadVCardBtn" aria-label="Save Contact to Phone">
                         <span>📇</span> Save Contact (.vcf)
                     </button>
 
@@ -459,7 +580,7 @@
                     </button>
                 </div>
 
-                <div class="card-footer-note">
+                <div class="card-footer-note" id="cardFooterNote">
                     Rahul Mishra &nbsp;✦&nbsp; Founder & Lead Architect
                 </div>
 
@@ -469,8 +590,8 @@
             <div class="card-face card-face-back">
                 
                 <div>
-                    <h2 class="card-name" style="font-size: 1.35rem;">Rahul Mishra – NFC & QR Card</h2>
-                    <div class="card-company">Scan or Tap to Share Founder Profile</div>
+                    <h2 class="card-name" id="backCardName" style="font-size: 1.35rem;">Rahul Mishra – NFC & QR Card</h2>
+                    <div class="card-company" id="backCardSub">Scan or Tap to Share Executive Profile</div>
                 </div>
 
                 <!-- QR Code Box -->
@@ -489,7 +610,7 @@
                     </button>
 
                     <button class="btn-flip-trigger" id="shareCardBtn" style="font-size: 0.85rem; padding: 0.75rem;">
-                        <span>📤</span> Share Rahul Mishra Digital Card
+                        <span>📤</span> <span id="shareBtnLabel">Share Digital Card</span>
                     </button>
 
                     <button class="btn-flip-trigger" id="flipToFrontBtn" style="font-size: 0.85rem; padding: 0.75rem;">
@@ -497,7 +618,7 @@
                     </button>
                 </div>
 
-                <div class="card-footer-note">
+                <div class="card-footer-note" id="backCardFooterNote">
                     Founder: Rahul Mishra &nbsp;✦&nbsp; N3Rah Tech
                 </div>
 
@@ -521,11 +642,134 @@
             const writeNfcBtn    = document.getElementById('writeNfcBtn');
             const nfcBadgeText   = document.getElementById('nfcStatusText');
 
-            /* ── 3D Card Flip Handler ── */
-            if (flipToBackBtn && flipToFrontBtn && cardWrapper) {
-                flipToBackBtn.addEventListener('click', () => cardWrapper.classList.add('flipped'));
-                flipToFrontBtn.addEventListener('click', () => cardWrapper.classList.remove('flipped'));
-            }
+            /* ── Profiles Data Registry ── */
+            const profilesData = {
+                rahul: {
+                    key: 'rahul',
+                    name: 'Rahul Mishra',
+                    cardName: 'Rahul Mishra',
+                    title: 'Founder & Lead Software Architect',
+                    badgeText: 'Founder',
+                    badgeClass: 'founder-tag-badge',
+                    companyText: '<span>🏢</span> N3Rah Tech Studio',
+                    tagline: 'INNOVATING THE FUTURE, CONNECTING THE WORLD',
+                    footerNote: 'Rahul Mishra &nbsp;✦&nbsp; Founder & Lead Architect',
+                    backTitle: 'Rahul Mishra – NFC & QR Card',
+                    backSub: 'Scan or Tap to Share Founder Profile',
+                    backFooter: 'Founder: Rahul Mishra &nbsp;✦&nbsp; N3Rah Tech',
+                    vcfFileName: 'Rahul_Mishra_N3Rah_Tech.vcf',
+                    vcardContent: [
+                        'BEGIN:VCARD',
+                        'VERSION:3.0',
+                        'FN:Rahul Mishra',
+                        'N:Mishra;Rahul;;;',
+                        'TITLE:Founder & Lead Software Architect',
+                        'ORG:N3Rah Tech',
+                        'TEL;TYPE=CELL,VOICE:+918791104601',
+                        'EMAIL;TYPE=WORK,INTERNET:n3rah.tech3@gmail.com',
+                        'URL:https://n3rah.vercel.app/',
+                        'NOTE:Rahul Mishra – Founder & Lead Software Architect at N3Rah Tech. Innovating The Future, Connecting The World.',
+                        'END:VCARD'
+                    ].join('\r\n'),
+                    shareTitle: 'Rahul Mishra – Founder & Lead Architect | N3Rah Tech',
+                    shareText: 'Connect with Rahul Mishra (Founder & Lead Architect at N3Rah Tech):',
+                    pageTitle: 'Rahul Mishra – Founder & Lead Software Architect | N3Rah Tech Digital Card',
+                    metaDesc: 'Official Digital NFC & QR Business Card for Rahul Mishra, Founder & Lead Software Architect at N3Rah Tech. Save contact, scan QR codes, or tap NFC tags.',
+                    actionsHtml: `
+                        <a href="tel:+918791104601" class="action-tile" aria-label="Call Rahul Mishra Direct">
+                            <span class="action-icon">📞</span>
+                            <span class="action-label">Call</span>
+                            <span class="action-sub">+91 87911 04601</span>
+                        </a>
+
+                        <a href="https://wa.me/918791104601?text=Hi%20Rahul!%20I%20scanned%20your%20N3Rah%20NFC/QR%20card." target="_blank" rel="noopener" class="action-tile" aria-label="WhatsApp Rahul Mishra Direct">
+                            <span class="action-icon">💬</span>
+                            <span class="action-label">WhatsApp</span>
+                            <span class="action-sub">Chat Direct</span>
+                        </a>
+
+                        <a href="mailto:n3rah.tech3@gmail.com" class="action-tile" aria-label="Email Rahul Mishra Direct">
+                            <span class="action-icon">📧</span>
+                            <span class="action-label">Email</span>
+                            <span class="action-sub">n3rah.tech3@gmail.com</span>
+                        </a>
+
+                        <a href="index.html" class="action-tile" aria-label="Visit N3Rah Main Website">
+                            <span class="action-icon">🌐</span>
+                            <span class="action-label">Website</span>
+                            <span class="action-sub">n3rah.vercel.app</span>
+                        </a>
+                    `
+                },
+                vaibhaw: {
+                    key: 'vaibhaw',
+                    name: 'Vaibhaw Mishra',
+                    cardName: 'VAIBHAW MISHRA',
+                    title: 'Lead Developer & Co-Founder',
+                    badgeText: 'Co-Founder',
+                    badgeClass: 'cofounder-tag-badge',
+                    companyText: '<span>🏢</span> N3Rah Tech Studio',
+                    tagline: 'INNOVATING THE FUTURE, CONNECTING THE WORLD',
+                    footerNote: 'Vaibhaw Mishra &nbsp;✦&nbsp; Lead Developer & Co-Founder',
+                    backTitle: 'Vaibhaw Mishra – NFC & QR Card',
+                    backSub: 'Scan or Tap to Share Co-Founder Profile',
+                    backFooter: 'Co-Founder: Vaibhaw Mishra &nbsp;✦&nbsp; N3Rah Tech',
+                    vcfFileName: 'Vaibhaw_Mishra_N3Rah_Tech.vcf',
+                    vcardContent: [
+                        'BEGIN:VCARD',
+                        'VERSION:3.0',
+                        'FN:Vaibhaw Mishra',
+                        'N:Mishra;Vaibhaw;;;',
+                        'TITLE:Lead Developer & Co-Founder',
+                        'ORG:N3Rah Tech',
+                        'TEL;TYPE=CELL,VOICE;PREF:+918931899566',
+                        'TEL;TYPE=CELL,VOICE:+918791104601',
+                        'EMAIL;TYPE=WORK,INTERNET:n3rah.tech3@gmail.com',
+                        'URL:https://n3rah.vercel.app/',
+                        'NOTE:Vaibhaw Mishra – Lead Developer & Co-Founder at N3Rah Tech. Innovating The Future, Connecting The World.',
+                        'END:VCARD'
+                    ].join('\r\n'),
+                    shareTitle: 'Vaibhaw Mishra – Lead Developer & Co-Founder | N3Rah Tech',
+                    shareText: 'Connect with Vaibhaw Mishra (Lead Developer & Co-Founder at N3Rah Tech):',
+                    pageTitle: 'Vaibhaw Mishra – Lead Developer & Co-Founder | N3Rah Tech Digital Card',
+                    metaDesc: 'Official Digital NFC & QR Business Card for Vaibhaw Mishra, Lead Developer & Co-Founder at N3Rah Tech. Save contact, scan QR codes, or tap NFC tags.',
+                    actionsHtml: `
+                        <a href="tel:+918931899566" class="action-tile" aria-label="Call Vaibhaw Mishra Primary Line">
+                            <span class="action-icon">📞</span>
+                            <span class="action-label">Call (Line 1)</span>
+                            <span class="action-sub">+91 8931899566</span>
+                        </a>
+
+                        <a href="tel:+918791104601" class="action-tile" aria-label="Call Vaibhaw Mishra Secondary Line">
+                            <span class="action-icon">📞</span>
+                            <span class="action-label">Call (Line 2)</span>
+                            <span class="action-sub">+91 8791104601</span>
+                        </a>
+
+                        <a href="https://wa.me/918931899566?text=Hi%20Vaibhaw!%20I%20scanned%20your%20N3Rah%20NFC/QR%20card." target="_blank" rel="noopener" class="action-tile" aria-label="WhatsApp Vaibhaw Mishra Direct">
+                            <span class="action-icon">💬</span>
+                            <span class="action-label">WhatsApp</span>
+                            <span class="action-sub">+91 8931899566</span>
+                        </a>
+
+                        <a href="mailto:n3rah.tech3@gmail.com" class="action-tile" aria-label="Email Vaibhaw Mishra Direct">
+                            <span class="action-icon">📧</span>
+                            <span class="action-label">Email</span>
+                            <span class="action-sub">n3rah.tech3@gmail.com</span>
+                        </a>
+
+                        <a href="index.html" class="action-tile tile-full-width" aria-label="Visit N3Rah Main Website">
+                            <span class="action-icon">🌐</span>
+                            <div class="action-text-wrap">
+                                <span class="action-label">Scan to Visit Website</span>
+                                <span class="action-sub" style="color: var(--accent); font-weight: 700;">https://n3rah.vercel.app/</span>
+                            </div>
+                        </a>
+                    `
+                }
+            };
+
+            let activeProfile = 'rahul';
 
             /* ── Toast Notifications ── */
             function showToast(msg, isError = false) {
@@ -546,13 +790,14 @@
                 }, 4000);
             }
 
-            /* ── Dynamic QR Code Generation ── */
-            const qrTargetUrl = window.location.href;
-            const qrContainer = document.getElementById('qrcode');
-            if (qrContainer) {
+            /* ── Render Dynamic QR Code ── */
+            function renderQRCode(targetUrl) {
+                const qrContainer = document.getElementById('qrcode');
+                if (!qrContainer) return;
+                qrContainer.innerHTML = '';
                 if (typeof QRCode !== 'undefined') {
                     new QRCode(qrContainer, {
-                        text: qrTargetUrl,
+                        text: targetUrl,
                         width: 160,
                         height: 160,
                         colorDark: "#030712",
@@ -560,39 +805,122 @@
                         correctLevel: QRCode.CorrectLevel.H
                     });
                 } else {
-                    // Fallback to QR API if CDN offline
-                    qrContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(qrTargetUrl)}" alt="Rahul Mishra N3Rah Tech QR Code" width="160" height="160" />`;
+                    qrContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(targetUrl)}" alt="N3Rah Tech QR Code" width="160" height="160" />`;
                 }
+            }
+
+            /* ── Switch Active Profile ── */
+            function setActiveProfile(profileKey, updateUrl = true) {
+                if (!profilesData[profileKey]) return;
+                activeProfile = profileKey;
+                const data = profilesData[profileKey];
+
+                // 1. Update Tab Buttons
+                const tabRahul = document.getElementById('tabRahul');
+                const tabVaibhaw = document.getElementById('tabVaibhaw');
+                if (tabRahul && tabVaibhaw) {
+                    const isRahul = profileKey === 'rahul';
+                    tabRahul.classList.toggle('active', isRahul);
+                    tabRahul.setAttribute('aria-selected', isRahul ? 'true' : 'false');
+                    tabVaibhaw.classList.toggle('active', !isRahul);
+                    tabVaibhaw.setAttribute('aria-selected', !isRahul ? 'true' : 'false');
+                }
+
+                // 2. Update Document Meta & Title
+                document.title = data.pageTitle;
+                const metaDesc = document.querySelector('meta[name="description"]');
+                if (metaDesc) metaDesc.setAttribute('content', data.metaDesc);
+
+                // 3. Update Front Card Face
+                const cardBadge = document.getElementById('cardBadge');
+                if (cardBadge) {
+                    cardBadge.textContent = data.badgeText;
+                    cardBadge.className = data.badgeClass;
+                }
+
+                const cardName = document.getElementById('cardName');
+                if (cardName) cardName.textContent = data.cardName;
+
+                const cardTitle = document.getElementById('cardTitle');
+                if (cardTitle) cardTitle.textContent = data.title;
+
+                const cardCompany = document.getElementById('cardCompany');
+                if (cardCompany) cardCompany.innerHTML = data.companyText;
+
+                const cardTagline = document.getElementById('cardTagline');
+                if (cardTagline) cardTagline.textContent = data.tagline;
+
+                const cardActionsGrid = document.getElementById('cardActionsGrid');
+                if (cardActionsGrid) cardActionsGrid.innerHTML = data.actionsHtml;
+
+                const cardFooterNote = document.getElementById('cardFooterNote');
+                if (cardFooterNote) cardFooterNote.innerHTML = data.footerNote;
+
+                if (downloadVCard) downloadVCard.setAttribute('aria-label', `Save ${data.name} Contact to Phone`);
+
+                // 4. Update Back Card Face
+                const backCardName = document.getElementById('backCardName');
+                if (backCardName) backCardName.textContent = data.backTitle;
+
+                const backCardSub = document.getElementById('backCardSub');
+                if (backCardSub) backCardSub.textContent = data.backSub;
+
+                const backCardFooterNote = document.getElementById('backCardFooterNote');
+                if (backCardFooterNote) backCardFooterNote.innerHTML = data.backFooter;
+
+                const shareBtnLabel = document.getElementById('shareBtnLabel');
+                if (shareBtnLabel) shareBtnLabel.textContent = `Share ${data.name} Card`;
+
+                // 5. Generate Target Profile URL & Render QR Code
+                const targetProfileUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?profile=${profileKey}`;
+                renderQRCode(targetProfileUrl);
+
+                // 6. Update URL parameter without reload
+                if (updateUrl && window.history && window.history.replaceState) {
+                    window.history.replaceState(null, '', `?profile=${profileKey}`);
+                }
+            }
+
+            // Bind Tab Click Events
+            const tabRahul = document.getElementById('tabRahul');
+            const tabVaibhaw = document.getElementById('tabVaibhaw');
+            if (tabRahul) tabRahul.addEventListener('click', () => setActiveProfile('rahul', true));
+            if (tabVaibhaw) tabVaibhaw.addEventListener('click', () => setActiveProfile('vaibhaw', true));
+
+            // Determine Initial Profile from URL query or hash
+            const urlParams = new URLSearchParams(window.location.search);
+            const profileParam = urlParams.get('profile');
+            const hashParam = window.location.hash.replace('#', '').toLowerCase();
+
+            if (profileParam && profilesData[profileParam.toLowerCase()]) {
+                setActiveProfile(profileParam.toLowerCase(), false);
+            } else if (hashParam && profilesData[hashParam]) {
+                setActiveProfile(hashParam, false);
+            } else {
+                setActiveProfile('rahul', false);
+            }
+
+            /* ── 3D Card Flip Handler ── */
+            if (flipToBackBtn && flipToFrontBtn && cardWrapper) {
+                flipToBackBtn.addEventListener('click', () => cardWrapper.classList.add('flipped'));
+                flipToFrontBtn.addEventListener('click', () => cardWrapper.classList.remove('flipped'));
             }
 
             /* ── Generate & Download vCard (.vcf) ── */
             if (downloadVCard) {
                 downloadVCard.addEventListener('click', () => {
-                    const vcardData = [
-                        'BEGIN:VCARD',
-                        'VERSION:3.0',
-                        'FN:Rahul Mishra',
-                        'N:Mishra;Rahul;;;',
-                        'TITLE:Founder & Lead Software Architect',
-                        'ORG:N3Rah Tech',
-                        'TEL;TYPE=CELL,VOICE:+918791104601',
-                        'EMAIL;TYPE=WORK,INTERNET:n3rah.tech3@gmail.com',
-                        'URL:https://n3rah.vercel.app/',
-                        'NOTE:Rahul Mishra – Founder & Lead Software Architect at N3Rah Tech.',
-                        'END:VCARD'
-                    ].join('\r\n');
-
-                    const blob = new Blob([vcardData], { type: 'text/vcard;charset=utf-8' });
+                    const data = profilesData[activeProfile];
+                    const blob = new Blob([data.vcardContent], { type: 'text/vcard;charset=utf-8' });
                     const url = window.URL.createObjectURL(blob);
                     const link = document.createElement('a');
                     link.href = url;
-                    link.setAttribute('download', 'Rahul_Mishra_N3Rah_Tech.vcf');
+                    link.setAttribute('download', data.vcfFileName);
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
                     window.URL.revokeObjectURL(url);
 
-                    showToast('Rahul Mishra contact downloaded! Save to address book.');
+                    showToast(`${data.name} contact downloaded! Save to address book.`);
                 });
             }
 
@@ -602,12 +930,14 @@
                 if (writeNfcBtn) {
                     writeNfcBtn.addEventListener('click', async () => {
                         try {
+                            const data = profilesData[activeProfile];
+                            const targetUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?profile=${data.key}`;
                             const ndef = new NDEFReader();
-                            showToast('Approach NFC tag to program card URL...');
+                            showToast(`Approach NFC tag to program ${data.name}'s card...`);
                             await ndef.write({
-                                records: [{ recordType: "url", data: window.location.href }]
+                                records: [{ recordType: "url", data: targetUrl }]
                             });
-                            showToast('Successfully written to NFC Tag! 🎉');
+                            showToast(`Successfully written ${data.name}'s card to NFC Tag! 🎉`);
                         } catch (error) {
                             showToast('NFC Error: ' + (error.message || 'Permission denied'), true);
                         }
@@ -625,20 +955,22 @@
             /* ── Web Share API & Copy Link ── */
             if (shareCardBtn) {
                 shareCardBtn.addEventListener('click', async () => {
+                    const data = profilesData[activeProfile];
+                    const targetUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?profile=${data.key}`;
                     if (navigator.share) {
                         try {
                             await navigator.share({
-                                title: 'Rahul Mishra – Founder & Lead Architect | N3Rah Tech',
-                                text: 'Connect with Rahul Mishra (Founder at N3Rah Tech):',
-                                url: window.location.href
+                                title: data.shareTitle,
+                                text: data.shareText,
+                                url: targetUrl
                             });
-                            showToast('Rahul Mishra Digital Card shared!');
+                            showToast(`${data.name} Digital Card shared!`);
                         } catch (err) {
                             // User cancelled share
                         }
                     } else {
-                        navigator.clipboard.writeText(window.location.href);
-                        showToast('Rahul Mishra Card link copied to clipboard!');
+                        navigator.clipboard.writeText(targetUrl);
+                        showToast(`${data.name} Card link copied to clipboard!`);
                     }
                 });
             }

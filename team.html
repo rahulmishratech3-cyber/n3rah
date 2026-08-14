@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>Leadership & Engineering Team | N3Rah Tech Studio</title>
+    <meta name="title" content="Leadership & Engineering Team | N3Rah Tech Studio" />
+    <meta name="description" content="Meet the founders, software architects, and lead engineers behind N3Rah Tech. Learn about Rahul Mishra (Founder) and Vaibhaw Mishra (Co-Founder)." />
+    <meta name="keywords" content="N3Rah Tech team, Rahul Mishra founder, Vaibhaw Mishra co-founder, software architects, software development studio" />
+    <meta name="author" content="N3Rah Tech Studio" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="google-site-verification" content="google3bcdc46d6ee95f5e" />
+    <link rel="canonical" href="https://n3rah.vercel.app/team.html" />
+    <meta name="theme-color" content="#030712" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
+    <link rel="apple-touch-icon" href="assets/logo.jpg" />
+
+    <!-- Open Graph / Social Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://n3rah.vercel.app/team.html" />
+    <meta property="og:site_name" content="N3Rah Tech Studio" />
+    <meta property="og:title" content="Leadership & Engineering Team | N3Rah Tech Studio" />
+    <meta property="og:description" content="Meet the founders, lead software architects, and full-stack developers driving software innovation at N3Rah Tech." />
+    <meta property="og:image" content="https://n3rah.vercel.app/assets/logo.jpg" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Structured Data (JSON-LD Schema for Team) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://n3rah.vercel.app/#organization",
+          "name": "N3Rah Tech",
+          "url": "https://n3rah.vercel.app/",
+          "logo": "https://n3rah.vercel.app/assets/logo.jpg",
+          "slogan": "Innovating The Future, Connecting The World",
+          "founder": ["Rahul Mishra", "Vaibhaw Mishra"]
+        },
+        {
+          "@type": "Person",
+          "name": "Rahul Mishra",
+          "jobTitle": "Founder & Lead Software Architect",
+          "worksFor": { "@id": "https://n3rah.vercel.app/#organization" },
+          "url": "https://n3rah.vercel.app/card.html?profile=rahul",
+          "email": "n3rah.tech3@gmail.com",
+          "telephone": "+918791104601"
+        },
+        {
+          "@type": "Person",
+          "name": "Vaibhaw Mishra",
+          "jobTitle": "Lead Developer & Co-Founder",
+          "worksFor": { "@id": "https://n3rah.vercel.app/#organization" },
+          "url": "https://n3rah.vercel.app/card.html?profile=vaibhaw",
+          "email": "n3rah.tech3@gmail.com",
+          "telephone": "+918931899566"
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        /* Team Page Specific Enhancements */
+        .team-hero {
+            padding: 9rem 0 4rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-member-card {
+            background: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 2.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: var(--shadow-md);
+        }
+
+        body.light .team-member-card {
+            background: rgba(255, 255, 255, 0.92);
+            border-color: rgba(99, 102, 241, 0.2);
+        }
+
+        .team-member-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .member-avatar-wrap {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .member-avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+            object-fit: cover;
+            box-shadow: 0 0 28px rgba(99, 102, 241, 0.4);
+        }
+
+        .member-role-badge {
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 100px;
+            color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .member-role-badge.badge-founder {
+            background: var(--gradient-gold);
+        }
+
+        .member-role-badge.badge-cofounder {
+            background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #6366f1 100%);
+        }
+
+        .member-name {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.3rem;
+            color: var(--text-primary);
+        }
+
+        .member-title {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.25rem;
+        }
+
+        .member-bio {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .member-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            justify-content: center;
+            margin-bottom: 1.75rem;
+        }
+
+        .skill-pill {
+            font-size: 0.72rem;
+            font-weight: 600;
+            background: rgba(99, 102, 241, 0.08);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            color: var(--text-primary);
+            padding: 0.3rem 0.75rem;
+            border-radius: 100px;
+        }
+
+        body.light .skill-pill {
+            background: rgba(99, 102, 241, 0.12);
+        }
+
+        .member-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .member-action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            padding: 0.65rem 0.85rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-primary);
+        }
+
+        .member-action-btn:hover {
+            border-color: var(--accent);
+            background: rgba(99, 102, 241, 0.12);
+            color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+
+        .member-action-btn.btn-nfc {
+            grid-column: span 2;
+            background: var(--gradient);
+            color: #ffffff;
+            border: none;
+            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.35);
+        }
+
+        .member-action-btn.btn-nfc:hover {
+            box-shadow: 0 6px 22px rgba(99, 102, 241, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .culture-section {
+            padding: 5rem 0;
+            background: rgba(255, 255, 255, 0.01);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .culture-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
+            margin-top: 2.5rem;
+        }
+
+        .culture-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem 1.25rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .culture-card:hover {
+            border-color: var(--accent);
+            background: rgba(99, 102, 241, 0.06);
+            transform: translateY(-3px);
+        }
+
+        .culture-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .culture-title {
+            font-family: var(--font-title);
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .culture-desc {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        @media (max-width: 992px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+                max-width: 540px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .culture-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .culture-grid {
+                grid-template-columns: 1fr;
+            }
+            .member-actions {
+                grid-template-columns: 1fr;
+            }
+            .member-action-btn.btn-nfc {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Particles & Ambient Glow Background -->
+    <canvas id="particles" aria-hidden="true"></canvas>
+    <div class="ambient-glow bg-glow-1" aria-hidden="true"></div>
+    <div class="ambient-glow bg-glow-2" aria-hidden="true"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+    <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+    <!-- ========== NAVBAR ========== -->
+    <header class="navbar" id="navbar" role="banner">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo" aria-label="N3Rah Tech Homepage">
+                <img src="assets/logo.jpg" alt="N3Rah Tech Logo" class="nav-logo-img" />
+                <div class="nav-logo-text">
+                    <div class="logo-name-row">
+                        <span class="logo-n">N</span><span class="logo-3">3</span><span class="logo-rah">Rah</span>
+                        <span class="logo-tech">TECH</span>
+                    </div>
+                    <span class="nav-tagline">INNOVATING THE FUTURE, CONNECTING THE WORLD</span>
+                </div>
+            </a>
+
+            <button class="hamburger" id="hamburger" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="navLinks">
+                <span></span><span></span><span></span>
+            </button>
+
+            <nav class="nav-links" id="navLinks" role="navigation" aria-label="Main Navigation">
+                <a href="index.html#home" class="nav-link">Home</a>
+                <a href="index.html#services" class="nav-link">Services</a>
+                <a href="index.html#products" class="nav-link">Products</a>
+                <a href="index.html#estimator" class="nav-link">Estimator</a>
+                <a href="team.html" class="nav-link active">Team</a>
+                <a href="card.html" class="nav-link" aria-label="N3Rah Digital NFC Card">NFC Card</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme Dark or Light" title="Toggle theme">
+                    <span class="theme-icon theme-icon-dark">🌙</span>
+                    <span class="theme-icon theme-icon-light">☀️</span>
+                    <span class="theme-toggle-label">Dark</span>
+                </button>
+                <a href="index.html#contact" class="nav-cta" aria-label="Request Technical Proposal">Request Proposal</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- ========== HERO SECTION ========== -->
+        <section class="team-hero">
+            <div class="container">
+                <div class="section-header text-center" style="margin-bottom: 2.5rem;">
+                    <span class="section-tag">Leadership & Engineering Excellence</span>
+                    <h1 class="hero-title" style="font-size: 2.75rem; margin-top: 0.5rem;">
+                        The Visionaries & Engineers Behind <span class="gradient-text">N3Rah Tech</span>
+                    </h1>
+                    <p class="section-sub" style="max-width: 680px; margin: 1rem auto 0;">
+                        We are a boutique digital engineering studio dedicated to eliminating technical debt, engineering sub-second applications, and delivering transformative software for enterprises worldwide.
+                    </p>
+                </div>
+
+                <!-- Team Grid -->
+                <div class="team-grid">
+                    
+                    <!-- Member 1: Rahul Mishra -->
+                    <article class="team-member-card reveal">
+                        <div class="member-avatar-wrap">
+                            <img src="assets/logo.jpg" alt="Rahul Mishra - Founder & Lead Software Architect" class="member-avatar" />
+                            <span class="member-role-badge badge-founder">Founder & Architect</span>
+                        </div>
+
+                        <h2 class="member-name">Rahul Mishra</h2>
+                        <div class="member-title">Founder & Lead Software Architect</div>
+
+                        <p class="member-bio">
+                            Senior software architect specializing in high-concurrency cloud systems, distributed database architecture, bespoke web applications, and enterprise software engineering. Drives technical direction, system security, and client leverage across all studio projects.
+                        </p>
+
+                        <div class="member-skills">
+                            <span class="skill-pill">System Architecture</span>
+                            <span class="skill-pill">Next.js / React</span>
+                            <span class="skill-pill">Node.js & Python</span>
+                            <span class="skill-pill">PostgreSQL / Cloud</span>
+                            <span class="skill-pill">DevOps</span>
+                        </div>
+
+                        <div class="member-actions">
+                            <a href="tel:+918791104601" class="member-action-btn" aria-label="Call Rahul Mishra Direct">
+                                <span>📞</span> Call Direct
+                            </a>
+                            <a href="https://wa.me/918791104601?text=Hi%20Rahul!%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener" class="member-action-btn" aria-label="WhatsApp Rahul Mishra">
+                                <span>💬</span> WhatsApp
+                            </a>
+                            <a href="mailto:n3rah.tech3@gmail.com" class="member-action-btn" style="grid-column: span 2;" aria-label="Email Rahul Mishra">
+                                <span>📧</span> n3rah.tech3@gmail.com
+                            </a>
+                            <a href="card.html?profile=rahul" class="member-action-btn btn-nfc" aria-label="View Rahul Mishra Digital NFC Card">
+                                <span>📡</span> Digital NFC Card & Contact (.vcf)
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Member 2: Vaibhaw Mishra -->
+                    <article class="team-member-card reveal">
+                        <div class="member-avatar-wrap">
+                            <img src="assets/logo.jpg" alt="Vaibhaw Mishra - Lead Developer & Co-Founder" class="member-avatar" />
+                            <span class="member-role-badge badge-cofounder">Co-Founder & Lead Dev</span>
+                        </div>
+
+                        <h2 class="member-name">Vaibhaw Mishra</h2>
+                        <div class="member-title">Lead Developer & Co-Founder</div>
+
+                        <p class="member-bio">
+                            Full-stack developer & co-founder focused on product engineering, modern front-end design systems, scalable API integration, desktop software, and client relations. Ensures flawless execution, UI perfection, and rapid sprint delivery.
+                        </p>
+
+                        <div class="member-skills">
+                            <span class="skill-pill">Full-Stack Engineering</span>
+                            <span class="skill-pill">UI/UX Systems</span>
+                            <span class="skill-pill">TypeScript / JS</span>
+                            <span class="skill-pill">API Integration</span>
+                            <span class="skill-pill">Electron & Mobile</span>
+                        </div>
+
+                        <div class="member-actions">
+                            <a href="tel:+918931899566" class="member-action-btn" aria-label="Call Vaibhaw Mishra Line 1">
+                                <span>📞</span> Line 1 (+91 89318...)
+                            </a>
+                            <a href="tel:+918791104601" class="member-action-btn" aria-label="Call Vaibhaw Mishra Line 2">
+                                <span>📞</span> Line 2 (+91 87911...)
+                            </a>
+                            <a href="https://wa.me/918931899566?text=Hi%20Vaibhaw!%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener" class="member-action-btn" aria-label="WhatsApp Vaibhaw Mishra">
+                                <span>💬</span> WhatsApp Direct
+                            </a>
+                            <a href="mailto:n3rah.tech3@gmail.com" class="member-action-btn" aria-label="Email Vaibhaw Mishra">
+                                <span>📧</span> Email Inquiry
+                            </a>
+                            <a href="card.html?profile=vaibhaw" class="member-action-btn btn-nfc" aria-label="View Vaibhaw Mishra Digital NFC Card">
+                                <span>📡</span> Digital NFC Card & Contact (.vcf)
+                            </a>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== STUDIO CULTURE SECTION ========== -->
+        <section class="culture-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">How We Engineer</span>
+                    <h2 class="section-title">Our Core Studio <span class="gradient-text">Pillars</span></h2>
+                    <p class="section-sub">Every project architected by N3Rah Tech adheres to strict engineering benchmarks.</p>
+                </div>
+
+                <div class="culture-grid">
+                    <div class="culture-card reveal">
+                        <div class="culture-icon">⚡</div>
+                        <h3 class="culture-title">Sub-Second Speeds</h3>
+                        <p class="culture-desc">Optimized asset delivery, zero bloated dependencies, and lightning-fast backend response times.</p>
+                    </div>
+
+                    <div class="culture-card reveal">
+                        <div class="culture-icon">🛡️</div>
+                        <h3 class="culture-title">Zero Tech Debt</h3>
+                        <p class="culture-desc">Strict typing, modular architectural design, and 100% full IP code ownership transferred to you.</p>
+                    </div>
+
+                    <div class="culture-card reveal">
+                        <div class="culture-icon">🤝</div>
+                        <h3 class="culture-title">Founder Direct Access</h3>
+                        <p class="culture-desc">Work directly with our lead architects and co-founders without middle-management communication lag.</p>
+                    </div>
+
+                    <div class="culture-card reveal">
+                        <div class="culture-icon">🚀</div>
+                        <h3 class="culture-title">Fast Sprint Cycles</h3>
+                        <p class="culture-desc">Rapid 2 to 6 week release cycles designed to get your production-ready product to market faster.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== CTA SECTION ========== -->
+        <section class="section cta-section" style="text-align: center;">
+            <div class="container text-center" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <div class="section-header text-center" style="margin-bottom: 0; width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                    <span class="section-tag text-center" style="margin-left: auto; margin-right: auto;">Start Your Engineering Journey</span>
+                    <h2 class="section-title text-center" style="font-size: 2.2rem; margin-top: 0.5rem; width: 100%; text-align: center;">
+                        Ready to Build Your Next <span class="gradient-text">Software Product?</span>
+                    </h2>
+                    <p class="section-sub text-center" style="margin: 0.75rem auto 1.75rem; max-width: 600px; text-align: center;">
+                        Schedule a technical discovery session with our co-founders to review your architectural requirements and receive a comprehensive roadmap.
+                    </p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap; margin: 0 auto; width: 100%;">
+                        <a href="index.html#contact" class="btn-primary" aria-label="Request Technical Proposal">Request Proposal ↗</a>
+                        <a href="card.html" class="btn-outline" aria-label="Explore Digital NFC Cards">View Digital NFC Cards 📡</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer" role="contentinfo">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <a href="index.html" class="nav-logo" aria-label="N3Rah Tech Homepage">
+                    <img src="assets/logo.jpg" alt="N3Rah Tech Logo" class="nav-logo-img" />
+                    <div class="nav-logo-text">
+                        <div class="logo-name-row">
+                            <span class="logo-n">N</span><span class="logo-3">3</span><span class="logo-rah">Rah</span>
+                            <span class="logo-tech">TECH</span>
+                        </div>
+                        <span class="nav-tagline">INNOVATING THE FUTURE, CONNECTING THE WORLD</span>
+                    </div>
+                </a>
+                <p>Engineering high-performance software, custom applications, and bespoke web solutions that scale globally.</p>
+                <div class="footer-socials">
+                    <a href="https://twitter.com/N3RahStudio" aria-label="Follow N3Rah on Twitter" class="social-btn" target="_blank" rel="noopener">𝕏</a>
+                    <a href="https://linkedin.com/company/n3rah" aria-label="Follow N3Rah on LinkedIn" class="social-btn" target="_blank" rel="noopener">in</a>
+                    <a href="https://github.com/n3rah" aria-label="View N3Rah GitHub Code Repositories" class="social-btn" target="_blank" rel="noopener">⌥</a>
+                    <a href="https://instagram.com/n3rah" aria-label="Follow N3Rah on Instagram" class="social-btn" target="_blank" rel="noopener">◎</a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <a href="index.html#services">Website Development</a>
+                    <a href="index.html#services">Mobile App Development</a>
+                    <a href="index.html#services">Desktop Applications</a>
+                    <a href="index.html#services">Enterprise Software</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Product Suite</h4>
+                    <a href="index.html#products">HRMS Portal</a>
+                    <a href="index.html#products">Inventory Management</a>
+                    <a href="index.html#products">Rahul Foam Website</a>
+                    <a href="index.html#products">N3Bot AI Assistant</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <a href="index.html#about">About N3Rah</a>
+                    <a href="team.html">Leadership & Team</a>
+                    <a href="index.html#process">Our Methodology</a>
+                    <a href="index.html#estimator">Cost Estimator</a>
+                    <a href="card.html">Digital NFC & QR Card</a>
+                    <a href="index.html#contact">Contact Us</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 N3Rah. All rights reserved. Architected & Developed by Rahul Mishra & Vaibhaw Mishra.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+    <!-- Script File -->
+    <script src="script.js"></script>
+</body>
+
+</html>
