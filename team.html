@@ -10,24 +10,39 @@
     <title>Leadership & Engineering Team | N3Rah Tech Studio</title>
     <meta name="title" content="Leadership & Engineering Team | N3Rah Tech Studio" />
     <meta name="description" content="Meet the founders, software architects, and lead engineers behind N3Rah Tech. Learn about Rahul Mishra (Founder) and Vaibhaw Mishra (Co-Founder)." />
-    <meta name="keywords" content="N3Rah Tech team, Rahul Mishra founder, Vaibhaw Mishra co-founder, software architects, software development studio" />
+    <meta name="keywords" content="N3Rah Tech team, Rahul Mishra founder, Vaibhaw Mishra co-founder, software architects, software development studio, full-stack engineers" />
     <meta name="author" content="N3Rah Tech Studio" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="google-site-verification" content="google3bcdc46d6ee95f5e" />
     <link rel="canonical" href="https://n3rah.vercel.app/team.html" />
     <meta name="theme-color" content="#030712" />
 
-    <!-- Favicon -->
+    <!-- Favicon & Web App Manifest -->
     <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
     <link rel="apple-touch-icon" href="assets/logo.jpg" />
+    <link rel="manifest" href="site.webmanifest" />
 
     <!-- Open Graph / Social Meta Tags -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content="profile" />
     <meta property="og:url" content="https://n3rah.vercel.app/team.html" />
     <meta property="og:site_name" content="N3Rah Tech Studio" />
     <meta property="og:title" content="Leadership & Engineering Team | N3Rah Tech Studio" />
     <meta property="og:description" content="Meet the founders, lead software architects, and full-stack developers driving software innovation at N3Rah Tech." />
-    <meta property="og:image" content="https://n3rah.vercel.app/assets/logo.jpg" />
+    <meta property="og:image" content="https://n3rah.vercel.app/assets/og-cover.png" />
+    <meta property="og:image:secure_url" content="https://n3rah.vercel.app/assets/og-cover.png" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="671" />
+    <meta property="og:image:height" content="636" />
+    <meta property="og:image:alt" content="N3Rah Tech Studio Engineering & Leadership Team" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://n3rah.vercel.app/team.html" />
+    <meta name="twitter:title" content="Leadership & Engineering Team | N3Rah Tech Studio" />
+    <meta name="twitter:description" content="Meet the founders, lead software architects, and full-stack developers driving software innovation at N3Rah Tech." />
+    <meta name="twitter:image" content="https://n3rah.vercel.app/assets/og-cover.png" />
+    <meta name="twitter:creator" content="@N3RahStudio" />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -43,31 +58,86 @@
       "@context": "https://schema.org",
       "@graph": [
         {
+          "@type": "AboutPage",
+          "@id": "https://n3rah.vercel.app/team.html#aboutPage",
+          "url": "https://n3rah.vercel.app/team.html",
+          "name": "Leadership & Engineering Team | N3Rah Tech Studio",
+          "description": "Meet the founders and software architects driving software engineering at N3Rah Tech.",
+          "isPartOf": {
+            "@id": "https://n3rah.vercel.app/#website"
+          },
+          "inLanguage": "en-US"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://n3rah.vercel.app/team.html#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://n3rah.vercel.app/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Team & Leadership",
+              "item": "https://n3rah.vercel.app/team.html"
+            }
+          ]
+        },
+        {
           "@type": "Organization",
           "@id": "https://n3rah.vercel.app/#organization",
           "name": "N3Rah Tech",
           "url": "https://n3rah.vercel.app/",
           "logo": "https://n3rah.vercel.app/assets/logo.jpg",
-          "slogan": "Innovating The Future, Connecting The World",
-          "founder": ["Rahul Mishra", "Vaibhaw Mishra"]
+          "slogan": "Innovating The Future, Connecting The World"
         },
         {
           "@type": "Person",
+          "@id": "https://n3rah.vercel.app/team.html#rahul-mishra",
           "name": "Rahul Mishra",
           "jobTitle": "Founder & Lead Software Architect",
           "worksFor": { "@id": "https://n3rah.vercel.app/#organization" },
           "url": "https://n3rah.vercel.app/card.html?profile=rahul",
+          "image": "https://n3rah.vercel.app/assets/logo.jpg",
           "email": "n3rah.tech3@gmail.com",
-          "telephone": "+918791104601"
+          "telephone": "+918791104601",
+          "knowsAbout": [
+            "Software Architecture",
+            "Next.js & React Full-Stack Engineering",
+            "Cloud Microservices & DevOps",
+            "AI Agent Systems & Automation",
+            "Database Scalability"
+          ],
+          "sameAs": [
+            "https://twitter.com/N3RahStudio",
+            "https://linkedin.com/company/n3rah",
+            "https://github.com/n3rah"
+          ]
         },
         {
           "@type": "Person",
+          "@id": "https://n3rah.vercel.app/team.html#vaibhaw-mishra",
           "name": "Vaibhaw Mishra",
           "jobTitle": "Lead Developer & Co-Founder",
           "worksFor": { "@id": "https://n3rah.vercel.app/#organization" },
           "url": "https://n3rah.vercel.app/card.html?profile=vaibhaw",
+          "image": "https://n3rah.vercel.app/assets/logo.jpg",
           "email": "n3rah.tech3@gmail.com",
-          "telephone": "+918931899566"
+          "telephone": "+918931899566",
+          "knowsAbout": [
+            "Frontend UI/UX Systems",
+            "React Native Mobile App Development",
+            "Electron Desktop Software",
+            "REST & GraphQL APIs"
+          ],
+          "sameAs": [
+            "https://twitter.com/N3RahStudio",
+            "https://linkedin.com/company/n3rah",
+            "https://github.com/n3rah"
+          ]
         }
       ]
     }

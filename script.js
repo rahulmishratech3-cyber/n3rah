@@ -8,7 +8,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ── Custom Cursor ── */
-  const cursorDot  = document.getElementById('cursorDot');
+  const cursorDot = document.getElementById('cursorDot');
   const cursorRing = document.getElementById('cursorRing');
   let mx = 0, my = 0, rx = 0, ry = 0;
 
@@ -16,25 +16,25 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mousemove', e => {
       mx = e.clientX; my = e.clientY;
       cursorDot.style.left = mx + 'px';
-      cursorDot.style.top  = my + 'px';
+      cursorDot.style.top = my + 'px';
     });
 
     (function animCursor() {
       rx += (mx - rx) * 0.15;
       ry += (my - ry) * 0.15;
       cursorRing.style.left = rx + 'px';
-      cursorRing.style.top  = ry + 'px';
+      cursorRing.style.top = ry + 'px';
       requestAnimationFrame(animCursor);
     })();
 
     document.querySelectorAll('a, button, .service-card, .product-card, .testimonial-card, .est-pill, .faq-question').forEach(el => {
       el.addEventListener('mouseenter', () => {
-        cursorRing.style.width  = '54px';
+        cursorRing.style.width = '54px';
         cursorRing.style.height = '54px';
         cursorRing.style.borderColor = 'rgba(99,102,241,0.9)';
       });
       el.addEventListener('mouseleave', () => {
-        cursorRing.style.width  = '38px';
+        cursorRing.style.width = '38px';
         cursorRing.style.height = '38px';
         cursorRing.style.borderColor = 'rgba(99,102,241,0.6)';
       });
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let W, H, particles = [];
 
     function resize() {
-      W = canvas.width  = window.innerWidth;
+      W = canvas.width = window.innerWidth;
       H = canvas.height = window.innerHeight;
     }
     resize();
@@ -79,9 +79,9 @@ document.addEventListener('DOMContentLoaded', () => {
     class Particle {
       constructor() { this.reset(); }
       reset() {
-        this.x  = Math.random() * W;
-        this.y  = Math.random() * H;
-        this.r  = Math.random() * 1.6 + 0.4;
+        this.x = Math.random() * W;
+        this.y = Math.random() * H;
+        this.r = Math.random() * 1.6 + 0.4;
         this.vx = (Math.random() - 0.5) * 0.35;
         this.vy = (Math.random() - 0.5) * 0.35;
         this.alpha = Math.random() * 0.5 + 0.15;
@@ -145,8 +145,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ── Hamburger Menu (Card Dropdown) ── */
-  const hamburger    = document.getElementById('hamburger');
-  const navLinks     = document.getElementById('navLinks');
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
   const navContainer = document.querySelector('.nav-container');
 
   function closeMobileNav() {
@@ -271,23 +271,23 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ── Interactive Project Cost Estimator ── */
-  const estTypePills  = document.querySelectorAll('#estTypePills .est-pill');
+  const estTypePills = document.querySelectorAll('#estTypePills .est-pill');
   const estScopePills = document.querySelectorAll('#estScopePills .est-pill');
-  const estAddonChecks= document.querySelectorAll('#estAddons input[type="checkbox"]');
-  const resultPrice   = document.getElementById('resultPrice');
+  const estAddonChecks = document.querySelectorAll('#estAddons input[type="checkbox"]');
+  const resultPrice = document.getElementById('resultPrice');
   const resultSummary = document.getElementById('resultSummary');
   const applyEstimateBtn = document.getElementById('applyEstimateBtn');
 
   function calculateEstimate() {
     let basePrice = 1200;
-    let typeName  = 'High-End Website';
+    let typeName = 'High-End Website';
     let scopeMult = 1.0;
     let scopeName = 'Starter MVP';
 
     estTypePills.forEach(pill => {
       if (pill.classList.contains('active')) {
         basePrice = parseFloat(pill.dataset.base);
-        typeName  = pill.textContent.trim();
+        typeName = pill.textContent.trim();
       }
     });
 
@@ -361,8 +361,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ── Product Quick View Specs Modal ── */
   const productModal = document.getElementById('productModal');
-  const modalClose   = document.getElementById('modalClose');
-  const modalBody    = document.getElementById('modalBody');
+  const modalClose = document.getElementById('modalClose');
+  const modalBody = document.getElementById('modalBody');
 
   const productsData = {
     hrms: {
@@ -527,7 +527,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ── Contact Form Cyber Security Handler ── */
-  const form      = document.getElementById('contactForm');
+  const form = document.getElementById('contactForm');
   const submitBtn = document.getElementById('submitBtn');
 
   if (form) {
@@ -562,10 +562,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // 4. Raw Input Extraction
-      const rawName    = form.name.value.trim();
-      const rawEmail   = form.email.value.trim();
+      const rawName = form.name.value.trim();
+      const rawEmail = form.email.value.trim();
       const rawSubject = form.subject ? form.subject.value : 'General';
-      const rawBudget  = form.budget ? form.budget.value : 'Not specified';
+      const rawBudget = form.budget ? form.budget.value : 'Not specified';
       const rawMessage = form.message.value.trim();
 
       // 5. Empty Fields Check
@@ -587,10 +587,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // 8. Input Sanitization
-      const cleanName    = sanitizeHTML(rawName);
-      const cleanEmail   = sanitizeHTML(rawEmail);
+      const cleanName = sanitizeHTML(rawName);
+      const cleanEmail = sanitizeHTML(rawEmail);
       const cleanSubject = sanitizeHTML(rawSubject);
-      const cleanBudget  = sanitizeHTML(rawBudget);
+      const cleanBudget = sanitizeHTML(rawBudget);
       const cleanMessage = sanitizeHTML(rawMessage);
 
       // Disable button to prevent double-submit attacks
@@ -620,29 +620,29 @@ document.addEventListener('DOMContentLoaded', () => {
           _template: 'table'
         })
       })
-      .then(res => res.json())
-      .then(data => {
-        showToast('Proposal request encrypted & sent! We will email you back within 24h.');
-        form.reset();
-      })
-      .catch(err => {
-        const sub = encodeURIComponent(`N3Rah Project Inquiry: ${cleanSubject}`);
-        const body = encodeURIComponent(`Name: ${cleanName}\nEmail: ${cleanEmail}\nCategory: ${cleanSubject}\n\nProject Details:\n${cleanMessage}`);
-        window.location.href = `mailto:n3rah.tech3@gmail.com?subject=${sub}&body=${body}`;
-        showToast('Opening secure mail app to complete inquiry...');
-      })
-      .finally(() => {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.querySelector('span').textContent = 'Send Proposal Request';
-        }
-      });
+        .then(res => res.json())
+        .then(data => {
+          showToast('Proposal request encrypted & sent! We will email you back within 24h.');
+          form.reset();
+        })
+        .catch(err => {
+          const sub = encodeURIComponent(`N3Rah Project Inquiry: ${cleanSubject}`);
+          const body = encodeURIComponent(`Name: ${cleanName}\nEmail: ${cleanEmail}\nCategory: ${cleanSubject}\n\nProject Details:\n${cleanMessage}`);
+          window.location.href = `mailto:n3rah.tech3@gmail.com?subject=${sub}&body=${body}`;
+          showToast('Opening secure mail app to complete inquiry...');
+        })
+        .finally(() => {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.querySelector('span').textContent = 'Send Proposal Request';
+          }
+        });
     });
   }
 
   /* ── Theme Toggle ── */
   const themeToggle = document.getElementById('themeToggle');
-  const themeLabel  = themeToggle ? themeToggle.querySelector('.theme-toggle-label') : null;
+  const themeLabel = themeToggle ? themeToggle.querySelector('.theme-toggle-label') : null;
 
   function applyTheme(isLight) {
     document.body.classList.toggle('light', isLight);
@@ -651,9 +651,9 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('n3rah-theme', isLight ? 'light' : 'dark');
   }
 
-  const savedTheme  = localStorage.getItem('n3rah-theme');
+  const savedTheme = localStorage.getItem('n3rah-theme');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const startLight  = savedTheme ? savedTheme === 'light' : !prefersDark;
+  const startLight = savedTheme ? savedTheme === 'light' : !prefersDark;
   applyTheme(startLight);
 
   if (themeToggle) {

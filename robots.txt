@@ -1,7 +1,7 @@
-# N3Rah Tech - Robots.txt for Vercel Hosting
+# N3Rah Tech - Robots.txt for Search Engines
 User-agent: *
 Allow: /
+Disallow: /admin.html
 
-# Host & Sitemap
-Host: https://n3rah.vercel.app
+# Sitemap Reference
 Sitemap: https://n3rah.vercel.app/sitemap.xml

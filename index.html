@@ -7,39 +7,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
 
     <!-- Primary SEO Meta Tags -->
-    <title>N3Rah – Enterprise Software, Custom Applications & Bespoke Web Development</title>
-    <meta name="title" content="N3Rah – Enterprise Software, Custom Applications & Bespoke Web Development" />
+    <title>N3Rah Tech – Enterprise Software, Custom Apps & Bespoke Web Development</title>
+    <meta name="title" content="N3Rah Tech – Enterprise Software, Custom Apps & Bespoke Web Development" />
     <meta name="description"
-        content="N3Rah is a boutique digital engineering studio. We build enterprise software, high-performance web applications, mobile apps, and bespoke digital products with sub-second speeds." />
+        content="N3Rah Tech is a premier digital engineering studio. We build enterprise software, scalable SaaS platforms, high-speed bespoke websites, mobile apps, and AI solutions." />
     <meta name="keywords"
-        content="software development company, custom application development, bespoke web development, mobile app development, enterprise software engineering, SaaS studio, N3Rah" />
-    <meta name="author" content="Rahul Mishra - N3Rah" />
+        content="software development company, custom software engineering, bespoke web development, mobile app development, enterprise SaaS studio, Next.js React developers, AI automation integration, N3Rah Tech, Rahul Mishra" />
+    <meta name="author" content="Rahul Mishra - N3Rah Tech" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="google-site-verification" content="google3bcdc46d6ee95f5e" />
     <link rel="canonical" href="https://n3rah.vercel.app/" />
     <meta name="theme-color" content="#030712" />
 
-    <!-- Favicon -->
+    <!-- Favicon & Web App Manifest -->
     <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
     <link rel="apple-touch-icon" href="assets/logo.jpg" />
+    <link rel="manifest" href="site.webmanifest" />
 
     <!-- Open Graph / Facebook / LinkedIn Meta Tags -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://n3rah.vercel.app/" />
-    <meta property="og:site_name" content="N3Rah Studio" />
-    <meta property="og:title" content="N3Rah – Enterprise Software, Custom Applications & Bespoke Web Development" />
+    <meta property="og:site_name" content="N3Rah Tech Studio" />
+    <meta property="og:title" content="N3Rah Tech – Enterprise Software, Custom Apps & Bespoke Web Development" />
     <meta property="og:description"
         content="We engineer high-performance software, custom applications, and bespoke websites built for speed, security, and enterprise growth." />
     <meta property="og:image" content="https://n3rah.vercel.app/assets/og-cover.png" />
+    <meta property="og:image:secure_url" content="https://n3rah.vercel.app/assets/og-cover.png" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="671" />
+    <meta property="og:image:height" content="636" />
+    <meta property="og:image:alt" content="N3Rah Tech - Official Seal & Logo" />
     <meta property="og:locale" content="en_US" />
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://n3rah.vercel.app/" />
-    <meta name="twitter:title" content="N3Rah – Enterprise Software, Custom Applications & Bespoke Web Development" />
+    <meta name="twitter:title" content="N3Rah Tech – Enterprise Software, Custom Apps & Bespoke Web Development" />
     <meta name="twitter:description"
         content="We engineer high-performance software, custom applications, and bespoke websites built for speed, security, and enterprise growth." />
     <meta name="twitter:image" content="https://n3rah.vercel.app/assets/og-cover.png" />
+    <meta name="twitter:image:alt" content="N3Rah Tech - Enterprise Software, Custom Apps and Bespoke Web Engineering Studio" />
     <meta name="twitter:creator" content="@N3RahStudio" />
 
     <!-- Fonts & Performance Preconnect -->
@@ -56,20 +63,60 @@
       "@context": "https://schema.org",
       "@graph": [
         {
+          "@type": "WebSite",
+          "@id": "https://n3rah.vercel.app/#website",
+          "url": "https://n3rah.vercel.app/",
+          "name": "N3Rah Tech",
+          "alternateName": ["N3Rah", "N3Rah Tech Studio", "N3Rah Digital Engineering"],
+          "description": "Enterprise Software, Custom Applications & Bespoke Web Development Studio",
+          "publisher": {
+            "@id": "https://n3rah.vercel.app/#organization"
+          },
+          "inLanguage": "en-US"
+        },
+        {
           "@type": "Organization",
           "@id": "https://n3rah.vercel.app/#organization",
           "name": "N3Rah Tech",
+          "alternateName": "N3Rah Studio",
           "url": "https://n3rah.vercel.app/",
-          "logo": "https://n3rah.vercel.app/assets/logo.jpg",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://n3rah.vercel.app/assets/logo.jpg",
+            "caption": "N3Rah Tech Logo"
+          },
+          "image": "https://n3rah.vercel.app/assets/og-cover.png",
           "slogan": "Innovating The Future, Connecting The World",
-          "description": "N3Rah Tech is a premier software, application, and web engineering studio.",
-          "founder": ["Rahul Mishra", "Vaibhaw Mishra"],
-          "email": "n3rah.tech3@gmail.com",
-          "telephone": "+918791104601",
+          "description": "N3Rah Tech is a premier software, application, and web engineering studio building mission-critical digital systems.",
+          "founder": [
+            {
+              "@type": "Person",
+              "name": "Rahul Mishra",
+              "jobTitle": "Founder & Lead Software Architect",
+              "url": "https://n3rah.vercel.app/card.html?profile=rahul"
+            },
+            {
+              "@type": "Person",
+              "name": "Vaibhaw Mishra",
+              "jobTitle": "Lead Developer & Co-Founder",
+              "url": "https://n3rah.vercel.app/card.html?profile=vaibhaw"
+            }
+          ],
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "telephone": "+918791104601",
+              "contactType": "customer service",
+              "email": "n3rah.tech3@gmail.com",
+              "areaServed": "Worldwide",
+              "availableLanguage": ["English", "Hindi"]
+            }
+          ],
           "sameAs": [
             "https://twitter.com/N3RahStudio",
             "https://linkedin.com/company/n3rah",
-            "https://github.com/n3rah"
+            "https://github.com/n3rah",
+            "https://instagram.com/n3rah"
           ]
         },
         {
@@ -77,17 +124,115 @@
           "@id": "https://n3rah.vercel.app/#service",
           "name": "N3Rah Software & Web Development",
           "url": "https://n3rah.vercel.app/",
+          "image": "https://n3rah.vercel.app/assets/og-cover.png",
           "priceRange": "$$$",
           "telephone": "+918791104601",
           "email": "n3rah.tech3@gmail.com",
-          "areaServed": "Worldwide",
-          "knowsAbout": [
-            "Software Development",
-            "Custom Mobile Applications",
-            "Bespoke Web Development",
-            "SaaS Architecture",
-            "AI Integration"
-          ]
+          "areaServed": {
+            "@type": "Place",
+            "name": "Worldwide"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.98",
+            "reviewCount": "24",
+            "bestRating": "5",
+            "worstRating": "1"
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Software Engineering Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Bespoke Website Development",
+                  "description": "High-converting, ultra-fast websites with custom UI/UX, headless CMS, and technical SEO."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Custom Mobile & Desktop Applications",
+                  "description": "Cross-platform mobile apps using React Native and desktop apps using Electron."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Enterprise Software & SaaS Engineering",
+                  "description": "Scalable cloud-native SaaS systems, microservices, and high-concurrency database architecture."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "AI & Automation Integration",
+                  "description": "OpenAI, LLM agents, automated workflow pipelines, and conversational AI chatbots."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "DevOps, Maintenance & Security Support",
+                  "description": "24/7 server monitoring, automated CI/CD pipelines, SSL, and security patch management."
+                }
+              }
+            ]
+          }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://n3rah.vercel.app/#hrms",
+          "name": "HRMS Portal",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web, Cloud",
+          "description": "Full-featured Human Resource Management System handling employee onboarding, biometric attendance, leave approvals, and automated payroll.",
+          "offers": {
+            "@type": "Offer",
+            "price": "Custom",
+            "priceCurrency": "INR"
+          },
+          "author": {
+            "@id": "https://n3rah.vercel.app/#organization"
+          }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://n3rah.vercel.app/#inventory",
+          "name": "Inventory Management System",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Windows, macOS, Linux, Web",
+          "description": "Dual Desktop (Electron) and Web (React) inventory control system with real-time barcode scanning and low-stock alerts.",
+          "offers": {
+            "@type": "Offer",
+            "price": "Custom",
+            "priceCurrency": "INR"
+          },
+          "author": {
+            "@id": "https://n3rah.vercel.app/#organization"
+          }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://n3rah.vercel.app/#n3bot",
+          "name": "N3Bot AI Assistant",
+          "applicationCategory": "UtilitiesApplication",
+          "operatingSystem": "Web, Cloud",
+          "description": "Intelligent conversational AI customer support agent trained on proprietary knowledge bases with lead qualification.",
+          "offers": {
+            "@type": "Offer",
+            "price": "Custom",
+            "priceCurrency": "INR"
+          },
+          "author": {
+            "@id": "https://n3rah.vercel.app/#organization"
+          }
         },
         {
           "@type": "FAQPage",
@@ -131,6 +276,22 @@
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "Every project includes 30 days of complimentary post-launch support, monitoring, and bug fixes. We also offer ongoing monthly DevOps and maintenance packages for continuous updates and server health."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is your development process and agile sprint delivery schedule?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We work in structured 2-week agile sprints with bi-weekly milestone demonstrations. Clients receive a dedicated project manager, continuous access to staging environments, and weekly progress reviews."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do you guarantee cyber security, data privacy, and code quality?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We follow OWASP Top 10 security guidelines, implement end-to-end HTTPS encryption, rigorous static analysis (linting/type checking), role-based access control (RBAC), and automated unit tests before any production deployment."
               }
             }
           ]
@@ -178,7 +339,8 @@
                         <a href="#services" class="nav-link" data-section="services">
                             <span>Services</span>
                             <svg class="dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
-                                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
                             </svg>
                         </a>
                         <div class="nav-dropdown-menu">
@@ -218,7 +380,8 @@
                         <a href="#products" class="nav-link" data-section="products">
                             <span>Products</span>
                             <svg class="dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
-                                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
                             </svg>
                         </a>
                         <div class="nav-dropdown-menu">
@@ -252,12 +415,14 @@
                 </div>
 
                 <div class="nav-actions-right">
-                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme Dark or Light" title="Toggle theme">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme Dark or Light"
+                        title="Toggle theme">
                         <span class="theme-icon theme-icon-dark">🌙</span>
                         <span class="theme-icon theme-icon-light">☀️</span>
                     </button>
                     <a href="#contact" class="btn-nav-outline" aria-label="Contact Sales">Contact Sales</a>
-                    <a href="#estimator" class="btn-nav-primary" aria-label="Request Technical Proposal">Get Proposal</a>
+                    <a href="#estimator" class="btn-nav-primary" aria-label="Request Technical Proposal">Get
+                        Proposal</a>
                     <a href="admin.html" class="btn-nav-signin" aria-label="Admin Proposal Portal">Admin 🔒</a>
                 </div>
             </nav>
@@ -921,6 +1086,26 @@
                         </div>
                     </div>
 
+                    <div class="faq-item reveal">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>What is your development process and agile sprint delivery schedule?</span>
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>We work in structured 2-week agile sprints with bi-weekly milestone demonstrations. Clients receive a dedicated project manager, continuous access to staging environments, and weekly progress reviews.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item reveal">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>How do you guarantee cyber security, data privacy, and code quality?</span>
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>We follow OWASP Top 10 security guidelines, implement end-to-end HTTPS encryption, rigorous static analysis (linting/type checking), role-based access control (RBAC), and automated unit tests before any production deployment.</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -1081,7 +1266,8 @@
                     <a href="team.html">Leadership & Team</a>
                     <a href="#estimator">Cost Estimator</a>
                     <a href="card.html">Digital NFC & QR Card</a>
-                    <a href="admin.html" style="color: var(--accent-light); font-weight: 600;">Admin Proposal Portal 🔒</a>
+                    <a href="admin.html" style="color: var(--accent-light); font-weight: 600;">Admin Proposal Portal
+                        🔒</a>
                     <a href="#contact">Contact Us</a>
                 </div>
             </div>
