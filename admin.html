@@ -10,7 +10,7 @@
     <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
 
     <!-- Cyber Security & Hardening Meta Tags -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; connect-src 'self' https://cdnjs.cloudflare.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
     <meta http-equiv="X-Frame-Options" content="DENY" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
@@ -23,7 +23,7 @@
         rel="stylesheet" />
 
     <!-- Admin Panel CSS -->
-    <link rel="stylesheet" href="admin.css" />
+    <link rel="stylesheet" href="admin.css?v=2.5" />
 </head>
 
 <body>
@@ -111,7 +111,17 @@
                  TAB 1: PROPOSAL & PROFORMA GENERATOR WORKSPACE
                  =================================================================== -->
             <section class="view-section active" id="view-generator">
-                <div class="generator-workspace">
+                <!-- Mobile Workspace Toggle (Visible on Small Screens Only) -->
+                <div class="mobile-pane-tabs" id="mobilePaneTabs">
+                    <button type="button" class="mobile-pane-btn active" data-pane="form">
+                        <span>📝 Form Editor</span>
+                    </button>
+                    <button type="button" class="mobile-pane-btn" data-pane="preview">
+                        <span>👁️ Live Preview & Export</span>
+                    </button>
+                </div>
+
+                <div class="generator-workspace" id="generatorWorkspace">
 
                     <!-- LEFT PANEL: CONFIGURATOR & AMOUNT CONTROLS -->
                     <div class="form-panel">
@@ -300,21 +310,25 @@
                                 <span>Live Real-Time Document Preview</span>
                             </div>
                             <div class="preview-actions">
-                                <button type="button" class="btn-preview-action primary" id="btnPrintProposal"
-                                    title="Print or Save as PDF">
-                                    🖨️ Print / Save PDF
+                                <button type="button" class="btn-preview-action primary" id="btnDownloadPDF"
+                                    title="Direct Download Clean A4 PDF File">
+                                    📥 Download PDF
+                                </button>
+                                <button type="button" class="btn-preview-action" id="btnPrintProposal"
+                                    title="Open System Print Dialog">
+                                    🖨️ Print
                                 </button>
                                 <button type="button" class="btn-preview-action whatsapp" id="btnWhatsAppProposal"
                                     title="Copy formatted text for WhatsApp">
-                                    💬 Copy WhatsApp
+                                    💬 WhatsApp
                                 </button>
                                 <button type="button" class="btn-preview-action" id="btnEmailProposal"
                                     title="Copy formatted email draft">
-                                    ✉️ Copy Email
+                                    ✉️ Email
                                 </button>
                                 <button type="button" class="btn-preview-action" id="btnSaveProposal"
                                     title="Save proposal to pipeline history">
-                                    💾 Save Proposal
+                                    💾 Save
                                 </button>
                             </div>
                         </div>
@@ -526,8 +540,11 @@
         Notification Message
     </div>
 
+    <!-- HTML2PDF Library (Direct High-Resolution A4 Client-Side PDF Generation) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
     <!-- Admin Panel Logic -->
-    <script src="admin.js"></script>
+    <script src="admin.js?v=3.0"></script>
 </body>
 
 </html>

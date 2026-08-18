@@ -78,6 +78,9 @@ body.light-theme {
 html {
   font-size: 15px;
   scroll-behavior: smooth;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -86,8 +89,21 @@ body {
   color: var(--text-primary);
   line-height: 1.5;
   min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
   position: relative;
   overflow-x: hidden;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* Background Ambient Orbs */
@@ -1523,12 +1539,6 @@ body {
   gap: 24px;
 }
 
-@media (max-width: 900px) {
-  .settings-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* Toast Notifications */
 .admin-toast {
   position: fixed;
@@ -1556,6 +1566,393 @@ body {
   transform: translateY(0);
   opacity: 1;
   pointer-events: auto;
+}
+
+/* ==========================================================================
+   MOBILE & TABLET RESPONSIVE SYSTEM (FULL RESPONSIVENESS)
+   ========================================================================== */
+
+/* Mobile Workspace Toggle Pill */
+.mobile-pane-tabs {
+  display: none;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border-glow);
+  border-radius: var(--radius-md);
+  padding: 4px;
+  margin-bottom: 18px;
+  gap: 6px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: sticky;
+  top: 70px;
+  z-index: 90;
+}
+
+.mobile-pane-btn {
+  flex: 1;
+  padding: 10px 14px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 0.86rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.mobile-pane-btn.active {
+  background: var(--gradient-primary);
+  color: #ffffff;
+  box-shadow: 0 2px 10px rgba(99, 102, 241, 0.4);
+}
+
+@media (max-width: 1024px) {
+  .mobile-pane-tabs {
+    display: flex;
+  }
+
+  .generator-workspace {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+  }
+
+  .generator-workspace.show-preview-only .form-panel {
+    display: none !important;
+  }
+
+  .generator-workspace.show-form-only .preview-panel {
+    display: none !important;
+  }
+
+  .preview-panel {
+    position: static !important;
+  }
+
+  .document-canvas-wrapper {
+    max-height: none !important;
+    overflow: visible !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  .template-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .settings-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Navbar Mobile Layout */
+  .admin-navbar {
+    padding: 10px 12px;
+  }
+
+  .nav-inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .admin-brand {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .nav-tabs {
+    width: 100%;
+    overflow-x: auto;
+    padding: 3px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+
+  .nav-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-tab-btn {
+    flex: 0 0 auto;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+
+  .nav-actions {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .btn-nav-action {
+    flex: 1;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    justify-content: center;
+  }
+
+  .view-site-link {
+    padding: 7px 10px;
+    font-size: 0.76rem;
+  }
+
+  .btn-nav-logout {
+    padding: 7px 10px;
+    font-size: 0.76rem;
+  }
+
+  /* Body Container */
+  .admin-body {
+    padding: 12px 8px;
+  }
+
+  .card-box {
+    padding: 16px 12px;
+    border-radius: var(--radius-md);
+  }
+
+  .card-title {
+    font-size: 0.95rem;
+  }
+
+  .card-subtitle {
+    font-size: 0.72rem;
+  }
+
+  /* 1-Click Templates on Mobile */
+  .template-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  /* Quick Amount Hero on Mobile */
+  .amount-input-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .currency-select {
+    width: 100%;
+  }
+
+  .amount-input {
+    font-size: 1.15rem;
+    padding: 10px 12px 10px 34px;
+  }
+
+  /* Form Fields Stacking */
+  .form-grid-2,
+  .form-grid-3 {
+    grid-template-columns: 1fr !important;
+    gap: 10px;
+  }
+
+  /* Deliverable Items on Mobile */
+  .item-top-row {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .item-index-badge {
+    order: 0;
+  }
+
+  .item-title-input {
+    width: calc(100% - 32px);
+    order: 1;
+  }
+
+  .item-amount-input {
+    flex: 1;
+    order: 2;
+    width: auto;
+    min-width: 110px;
+  }
+
+  .btn-remove-item {
+    order: 3;
+  }
+
+  /* Preview Toolbar on Mobile */
+  .preview-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .preview-status {
+    justify-content: center;
+  }
+
+  .preview-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .btn-preview-action {
+    justify-content: center;
+    width: 100%;
+    padding: 9px 8px;
+    font-size: 0.78rem;
+  }
+
+  /* Proforma Invoice Document Responsive Sizing */
+  .proforma-document {
+    padding: 18px 12px;
+    min-height: auto;
+    font-size: 12px;
+    border-radius: var(--radius-md);
+  }
+
+  .doc-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+  }
+
+  .doc-meta-block {
+    text-align: left;
+    width: 100%;
+  }
+
+  .doc-parties-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 12px;
+  }
+
+  .doc-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .doc-table {
+    min-width: 480px;
+  }
+
+  .doc-totals-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .doc-bank-box {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .doc-signatures-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* History / Pipeline Tab on Mobile */
+  .pipeline-stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .stat-box {
+    padding: 12px;
+  }
+
+  .stat-box-num {
+    font-size: 1.25rem;
+  }
+
+  .history-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .history-filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .filter-pills {
+    overflow-x: auto;
+    width: 100%;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+    flex-wrap: nowrap;
+  }
+
+  .filter-pills::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-pill {
+    flex: 0 0 auto;
+    padding: 5px 12px;
+    font-size: 0.76rem;
+  }
+
+  .history-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .history-table {
+    min-width: 650px;
+  }
+
+  /* Lock Screen Modal */
+  .lock-card {
+    padding: 28px 18px;
+    margin: 12px;
+    max-width: 360px;
+  }
+
+  .lock-title {
+    font-size: 1.35rem;
+  }
+
+  .lock-subtitle {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .preview-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .pipeline-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .brand-title {
+    font-size: 1rem;
+  }
+
+  .brand-sub {
+    display: none;
+  }
 }
 
 /* ==========================================================================
