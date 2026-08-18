@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>N3Rah Studio Admin – Quotation & Proforma Proposal Generator</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet" />
+
+    <!-- Admin Panel CSS -->
+    <link rel="stylesheet" href="admin.css" />
+</head>
+
+<body>
+
+    <!-- Ambient Glowing Backgrounds -->
+    <div class="admin-ambient-bg" aria-hidden="true">
+        <div class="ambient-orb-1"></div>
+        <div class="ambient-orb-2"></div>
+    </div>
+
+    <!-- ========== AUTH / LOCK SCREEN MODAL ========== -->
+    <div class="lock-screen" id="adminLockScreen">
+        <div class="lock-card">
+            <div class="lock-logo-wrap">
+                <img src="assets/logo.jpg" alt="N3Rah Logo" />
+            </div>
+            <h1 class="lock-title">N3Rah Studio Admin</h1>
+            <p class="lock-subtitle">Enter your admin passcode to access the proposal engine</p>
+
+            <form id="adminLockForm">
+                <div class="pin-input-group">
+                    <input type="password" id="adminPinInput" class="pin-input" placeholder="••••••••" autofocus
+                        autocomplete="current-password" required />
+                    <div class="pin-hint">Default Passcode: <code>N3Rah@2803</code></div>
+                </div>
+                <button type="submit" class="lock-btn">Unlock Studio Workspace →</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ========== MAIN APP WRAPPER ========== -->
+    <div class="app-container">
+
+        <!-- ========== TOP NAVBAR ========== -->
+        <header class="admin-navbar">
+            <div class="nav-inner">
+                <!-- Brand -->
+                <a href="index.html" class="admin-brand" title="View Public Website">
+                    <img src="assets/logo.jpg" alt="N3Rah Logo" class="admin-brand-logo" />
+                    <div class="brand-text">
+                        <div class="brand-title">
+                            N3Rah <span class="brand-badge">ADMIN</span>
+                        </div>
+                        <span class="brand-sub">Quotation & Budget Proposal Engine</span>
+                    </div>
+                </a>
+
+                <!-- Navigation Tabs -->
+                <nav class="nav-tabs" role="tablist">
+                    <button type="button" class="nav-tab-btn active" data-tab="generator" role="tab"
+                        aria-selected="true">
+                        <span>⚡ Generator</span>
+                    </button>
+                    <button type="button" class="nav-tab-btn" data-tab="history" role="tab" aria-selected="false">
+                        <span>📊 Proposals Pipeline</span>
+                        <span class="tab-badge" id="pipelineTabBadge">0</span>
+                    </button>
+                    <button type="button" class="nav-tab-btn" data-tab="settings" role="tab" aria-selected="false">
+                        <span>⚙️ Studio Profile</span>
+                    </button>
+                </nav>
+
+                <!-- Actions -->
+                <div class="nav-actions">
+                    <button type="button" class="btn-nav-action" id="btnNavNewQuotation" title="Create Blank Quotation">
+                        <span>+</span> New Proposal
+                    </button>
+                    <button type="button" class="btn-icon" id="adminThemeToggle" title="Toggle Light/Dark Theme">
+                        🌙
+                    </button>
+                    <a href="index.html" class="view-site-link" target="_blank" title="Open Main Website in new tab">
+                        <span>Live Site ↗</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- ========== MAIN VIEW CONTAINER ========== -->
+        <main class="admin-body">
+
+            <!-- ===================================================================
+                 TAB 1: PROPOSAL & PROFORMA GENERATOR WORKSPACE
+                 =================================================================== -->
+            <section class="view-section active" id="view-generator">
+                <div class="generator-workspace">
+
+                    <!-- LEFT PANEL: CONFIGURATOR & AMOUNT CONTROLS -->
+                    <div class="form-panel">
+
+                        <!-- 1. Scope & Service Presets -->
+                        <div class="card-box">
+                            <div class="card-header-clean">
+                                <div>
+                                    <div class="card-title">✨ 1-Click Service Templates</div>
+                                    <div class="card-subtitle">Select a service to automatically generate rich technical
+                                        deliverables</div>
+                                </div>
+                            </div>
+                            <div class="template-grid" id="templateGrid">
+                                <!-- Populated dynamically by admin.js -->
+                            </div>
+                        </div>
+
+                        <!-- 2. Auto-Amount Calculator Card -->
+                        <div class="card-box amount-hero-card">
+                            <div class="card-header-clean" style="border-bottom: none; margin-bottom: 8px;">
+                                <div>
+                                    <div class="card-title" style="color: var(--accent-light);">
+                                        💵 Enter Proposed Client Budget
+                                    </div>
+                                    <div class="card-subtitle">
+                                        Type any budget amount below — descriptions & milestone breakdowns
+                                        auto-distribute instantly!
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="amount-input-row">
+                                <select class="currency-select" id="currencySelect" title="Select Proposal Currency">
+                                    <option value="INR" selected>₹ INR</option>
+                                    <option value="USD">$ USD</option>
+                                    <option value="EUR">€ EUR</option>
+                                    <option value="GBP">£ GBP</option>
+                                    <option value="AED">AED (د.إ)</option>
+                                    <option value="CAD">C$ CAD</option>
+                                    <option value="AUD">A$ AUD</option>
+                                </select>
+
+                                <div class="amount-input-wrapper">
+                                    <span class="amount-currency-symbol currency-symbol-label">₹</span>
+                                    <input type="number" class="amount-input" id="totalBudgetInput" placeholder="65000"
+                                        value="65000" min="0" step="500" />
+                                </div>
+                            </div>
+
+                            <div class="quick-amount-pills">
+                                <span style="font-size: 0.72rem; color: var(--text-muted); align-self: center;">Quick
+                                    amounts:</span>
+                                <button type="button" class="amount-pill" data-amount="35000">₹35k</button>
+                                <button type="button" class="amount-pill" data-amount="65000">₹65k</button>
+                                <button type="button" class="amount-pill" data-amount="100000">₹1 Lakh</button>
+                                <button type="button" class="amount-pill" data-amount="150000">₹1.5 Lakh</button>
+                                <button type="button" class="amount-pill" data-amount="250000">₹2.5 Lakh</button>
+                                <button type="button" class="amount-pill" data-amount="1500">$1.5k</button>
+                                <button type="button" class="amount-pill" data-amount="3000">$3k</button>
+                                <button type="button" class="amount-pill" data-amount="5000">$5k</button>
+                            </div>
+                        </div>
+
+                        <!-- 3. Client & Organization Details -->
+                        <div class="card-box">
+                            <div class="card-header-clean">
+                                <div class="card-title">👤 Client & Organization Details</div>
+                            </div>
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label class="form-label" for="clientNameInput">Client Contact Name</label>
+                                    <input type="text" class="form-input" id="clientNameInput"
+                                        placeholder="e.g. Rahul Sharma" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="clientCompanyInput">Company / Organization</label>
+                                    <input type="text" class="form-input" id="clientCompanyInput"
+                                        placeholder="e.g. Acme Tech Corp" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="clientEmailInput">Client Email</label>
+                                    <input type="email" class="form-input" id="clientEmailInput"
+                                        placeholder="client@company.com" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="clientPhoneInput">Client Phone / WhatsApp</label>
+                                    <input type="text" class="form-input" id="clientPhoneInput"
+                                        placeholder="+91 9876543210" />
+                                </div>
+                                <div class="form-group full">
+                                    <label class="form-label" for="clientAddressInput">Client Address / Location</label>
+                                    <input type="text" class="form-input" id="clientAddressInput"
+                                        placeholder="e.g. Mumbai, India / Global" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. Proposal Metadata & Project Overview -->
+                        <div class="card-box">
+                            <div class="card-header-clean">
+                                <div class="card-title">📝 Proposal Metadata</div>
+                            </div>
+                            <div class="form-grid-3">
+                                <div class="form-group">
+                                    <label class="form-label" for="docNumberInput">Proposal Ref #</label>
+                                    <input type="text" class="form-input" id="docNumberInput" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="docDateInput">Issue Date</label>
+                                    <input type="date" class="form-input" id="docDateInput" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="docValidUntilInput">Valid Through</label>
+                                    <input type="date" class="form-input" id="docValidUntilInput" />
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-top: 12px;">
+                                <label class="form-label" for="projectNameInput">Project Title</label>
+                                <input type="text" class="form-input" id="projectNameInput"
+                                    placeholder="Project Name" />
+                            </div>
+                            <div class="form-group" style="margin-top: 12px;">
+                                <label class="form-label" for="projectOverviewInput">High-Level Executive Scope
+                                    Overview</label>
+                                <textarea class="form-textarea" id="projectOverviewInput"
+                                    placeholder="Executive summary of the proposal..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- 5. Deliverable Breakdown & Descriptions -->
+                        <div class="card-box">
+                            <div class="card-header-clean">
+                                <div>
+                                    <div class="card-title">📦 Itemized Deliverables & Descriptions</div>
+                                    <div class="card-subtitle">Generated automatically. You can edit any line item,
+                                        amount, or description below.</div>
+                                </div>
+                            </div>
+
+                            <div class="deliverable-list" id="deliverableList">
+                                <!-- Deliverable cards rendered dynamically by admin.js -->
+                            </div>
+
+                            <button type="button" class="btn-add-item" id="btnAddDeliverable">
+                                <span>+</span> Add Custom Deliverable Module
+                            </button>
+                        </div>
+
+                        <!-- 6. Financials, Discounts & Milestone Schedule -->
+                        <div class="card-box">
+                            <div class="card-header-clean">
+                                <div class="card-title">💳 Financial Adjustments & Milestones</div>
+                            </div>
+                            <div class="form-grid-3">
+                                <div class="form-group">
+                                    <label class="form-label" for="discountInput">
+                                        <span>Discount (<span class="currency-symbol-label">₹</span>)</span>
+                                    </label>
+                                    <input type="number" class="form-input" id="discountInput" value="0" min="0" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="taxRateInput">Tax / GST Rate (%)</label>
+                                    <input type="number" class="form-input" id="taxRateInput" value="0" min="0"
+                                        max="100" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="milestoneScheduleSelect">Milestone Structure</label>
+                                    <select class="form-select" id="milestoneScheduleSelect">
+                                        <option value="40-30-30">40% / 30% / 30% (Standard)</option>
+                                        <option value="50-50">50% / 50% (Two-Phase)</option>
+                                        <option value="100">100% Upfront Kickoff</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- RIGHT PANEL: LIVE INTERACTIVE DOCUMENT PREVIEW & EXPORT -->
+                    <div class="preview-panel">
+                        <!-- Toolbar -->
+                        <div class="preview-toolbar">
+                            <div class="preview-status">
+                                <span class="status-dot"></span>
+                                <span>Live Real-Time Document Preview</span>
+                            </div>
+                            <div class="preview-actions">
+                                <button type="button" class="btn-preview-action primary" id="btnPrintProposal"
+                                    title="Print or Save as PDF">
+                                    🖨️ Print / Save PDF
+                                </button>
+                                <button type="button" class="btn-preview-action whatsapp" id="btnWhatsAppProposal"
+                                    title="Copy formatted text for WhatsApp">
+                                    💬 Copy WhatsApp
+                                </button>
+                                <button type="button" class="btn-preview-action" id="btnEmailProposal"
+                                    title="Copy formatted email draft">
+                                    ✉️ Copy Email
+                                </button>
+                                <button type="button" class="btn-preview-action" id="btnSaveProposal"
+                                    title="Save proposal to pipeline history">
+                                    💾 Save Proposal
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Canvas Wrapper for Document -->
+                        <div class="document-canvas-wrapper">
+                            <div id="proformaDocRender">
+                                <!-- Proforma / Proposal Document rendered dynamically by admin.js -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ===================================================================
+                 TAB 2: PROPOSALS PIPELINE & HISTORY DASHBOARD
+                 =================================================================== -->
+            <section class="view-section" id="view-history">
+                <!-- Stats Grid -->
+                <div class="pipeline-stats-grid">
+                    <div class="stat-box highlight">
+                        <span class="stat-box-title">Total Pipeline Value</span>
+                        <div class="stat-box-num" id="statPipelineValue">₹0</div>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-box-title">Total Proposals Generated</span>
+                        <div class="stat-box-num" id="statTotalProposals">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-box-title">Accepted / Closed Deals</span>
+                        <div class="stat-box-num" id="statAcceptedCount" style="color: var(--green);">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-box-title">Active / In-Review</span>
+                        <div class="stat-box-num" id="statActiveCount" style="color: var(--accent-gold);">0</div>
+                    </div>
+                </div>
+
+                <!-- Filter & Search Toolbar -->
+                <div class="history-filter-bar">
+                    <input type="text" class="search-input" id="historySearchInput"
+                        placeholder="🔍 Search client, company, project..." />
+                    <div class="filter-pills">
+                        <button type="button" class="filter-pill active" data-filter="all">All</button>
+                        <button type="button" class="filter-pill" data-filter="draft">Draft</button>
+                        <button type="button" class="filter-pill" data-filter="sent">Sent</button>
+                        <button type="button" class="filter-pill" data-filter="accepted">Accepted</button>
+                        <button type="button" class="filter-pill" data-filter="paid">Paid</button>
+                        <button type="button" class="filter-pill" data-filter="declined">Declined</button>
+                    </div>
+                </div>
+
+                <!-- History Table -->
+                <div class="history-table-wrapper">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>REF ID</th>
+                                <th>CLIENT / COMPANY</th>
+                                <th>PROJECT TITLE</th>
+                                <th>TOTAL BUDGET</th>
+                                <th>DATE</th>
+                                <th>STATUS</th>
+                                <th>ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTableBody">
+                            <!-- Populated dynamically by admin.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ===================================================================
+                 TAB 3: STUDIO SETTINGS & BANKING PROFILE
+                 =================================================================== -->
+            <section class="view-section" id="view-settings">
+                <form id="settingsForm">
+                    <div class="settings-grid">
+
+                        <!-- Studio Details -->
+                        <div class="card-box">
+                            <div class="card-header-clean">
+                                <div class="card-title">🏢 Studio & Founder Information</div>
+                            </div>
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label class="form-label" for="setCompanyName">Company Name</label>
+                                    <input type="text" class="form-input" id="setCompanyName" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="setTagline">Company Tagline</label>
+                                    <input type="text" class="form-input" id="setTagline" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="setFounderName">Founder / Architect Name</label>
+                                    <input type="text" class="form-input" id="setFounderName" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="setRole">Designation / Role</label>
+                                    <input type="text" class="form-input" id="setRole" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="setEmail">Official Email</label>
+                                    <input type="email" class="form-input" id="setEmail" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="setPhone">Phone / WhatsApp</label>
+                                    <input type="text" class="form-input" id="setPhone" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="setWebsite">Website URL</label>
+                                    <input type="url" class="form-input" id="setWebsite" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="setAddress">Studio HQ / Location</label>
+                                    <input type="text" class="form-input" id="setAddress" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bank & Remittance Details -->
+                        <div class="card-box">
+                            <div class="card-header-clean">
+                                <div class="card-title">🏦 Bank Wire & UPI Credentials</div>
+                            </div>
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label class="form-label" for="setAccountName">Beneficiary Account Name</label>
+                                    <input type="text" class="form-input" id="setAccountName" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="setBankName">Bank Name</label>
+                                    <input type="text" class="form-input" id="setBankName" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="setAccountNumber">Account Number</label>
+                                    <input type="text" class="form-input" id="setAccountNumber" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="setIfscCode">IFSC / Routing Code</label>
+                                    <input type="text" class="form-input" id="setIfscCode" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="setUpiId">UPI ID / VPA</label>
+                                    <input type="text" class="form-input" id="setUpiId" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="setTaxId">Tax ID / GSTIN / PAN</label>
+                                    <input type="text" class="form-input" id="setTaxId" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Default Terms & Warranty Clauses -->
+                        <div class="card-box" style="grid-column: 1 / -1;">
+                            <div class="card-header-clean">
+                                <div class="card-title">📜 Default Terms, IP Ownership & Warranty Clauses (1 per line)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-textarea" id="setDefaultTerms"
+                                    style="min-height: 120px;"></textarea>
+                            </div>
+
+                            <div class="form-grid-3" style="margin-top: 16px;">
+                                <div class="form-group">
+                                    <label class="form-label" for="setDefaultCurrency">Default Currency</label>
+                                    <select class="form-select" id="setDefaultCurrency">
+                                        <option value="INR">₹ INR</option>
+                                        <option value="USD">$ USD</option>
+                                        <option value="EUR">€ EUR</option>
+                                        <option value="GBP">£ GBP</option>
+                                        <option value="AED">AED (د.إ)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="setDefaultTaxRate">Default Tax Rate (%)</label>
+                                    <input type="number" class="form-input" id="setDefaultTaxRate" value="0" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="setAdminPin">Admin Security PIN</label>
+                                    <input type="text" class="form-input" id="setAdminPin" placeholder="n3rah2026" />
+                                </div>
+                            </div>
+
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px; border-top: 1px solid var(--border); padding-top: 18px;">
+                                <button type="button" class="btn-preview-action" id="btnExportData">
+                                    📥 Export Backup (JSON)
+                                </button>
+                                <button type="submit" class="btn-nav-action"
+                                    style="padding: 12px 28px; font-size: 0.95rem;">
+                                    💾 Save Studio Settings
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div class="admin-toast" id="adminToast" role="alert">
+        Notification Message
+    </div>
+
+    <!-- Admin Panel Logic -->
+    <script src="admin.js"></script>
+</body>
+
+</html>
