@@ -32,7 +32,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="styles.css" />
@@ -327,17 +327,16 @@
     <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
     <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
 
-    <!-- ========== NAVBAR ========== -->
+    <!-- ========== NAVBAR (AIRTABLE SAAS STYLE) ========== -->
     <header class="navbar" id="navbar" role="banner">
         <div class="nav-container">
-            <a href="index.html" class="nav-logo" aria-label="N3Rah Tech Homepage">
+            <a href="index.html#home" class="nav-logo" aria-label="N3Rah Tech Homepage">
                 <img src="assets/logo.jpg" alt="N3Rah Tech Logo" class="nav-logo-img" />
                 <div class="nav-logo-text">
                     <div class="logo-name-row">
                         <span class="logo-n">N</span><span class="logo-3">3</span><span class="logo-rah">Rah</span>
                         <span class="logo-tech">TECH</span>
                     </div>
-                    <span class="nav-tagline">INNOVATING THE FUTURE, CONNECTING THE WORLD</span>
                 </div>
             </a>
 
@@ -346,19 +345,96 @@
             </button>
 
             <nav class="nav-links" id="navLinks" role="navigation" aria-label="Main Navigation">
-                <a href="index.html#home" class="nav-link">Home</a>
-                <a href="index.html#services" class="nav-link">Services</a>
-                <a href="index.html#products" class="nav-link">Products</a>
-                <a href="index.html#estimator" class="nav-link">Estimator</a>
-                <a href="about.html" class="nav-link" aria-label="About N3Rah">About</a>
-                <a href="team.html" class="nav-link active">Team</a>
-                <a href="card.html" class="nav-link" aria-label="N3Rah Digital NFC Card">NFC Card</a>
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme Dark or Light" title="Toggle theme">
-                    <span class="theme-icon theme-icon-dark">🌙</span>
-                    <span class="theme-icon theme-icon-light">☀️</span>
-                    <span class="theme-toggle-label">Dark</span>
-                </button>
-                <a href="index.html#contact" class="nav-cta" aria-label="Request Technical Proposal">Request Proposal</a>
+                <div class="nav-group-left">
+                    <a href="index.html#home" class="nav-link">Home</a>
+
+                    <!-- Services Dropdown -->
+                    <div class="nav-item-dropdown">
+                        <a href="index.html#services" class="nav-link">
+                            <span>Services</span>
+                            <svg class="dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
+                                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <div class="nav-dropdown-menu">
+                            <a href="index.html#services" class="dropdown-link-item">
+                                <span class="dd-icon">🌐</span>
+                                <div class="dd-text">
+                                    <strong>Bespoke Websites</strong>
+                                    <span>High-speed UI/UX & SEO platforms</span>
+                                </div>
+                            </a>
+                            <a href="index.html#services" class="dropdown-link-item">
+                                <span class="dd-icon">📱</span>
+                                <div class="dd-text">
+                                    <strong>Mobile & Desktop Apps</strong>
+                                    <span>iOS, Android & Electron builds</span>
+                                </div>
+                            </a>
+                            <a href="index.html#services" class="dropdown-link-item">
+                                <span class="dd-icon">⚡</span>
+                                <div class="dd-text">
+                                    <strong>Enterprise SaaS</strong>
+                                    <span>Scalable cloud architecture</span>
+                                </div>
+                            </a>
+                            <a href="index.html#services" class="dropdown-link-item">
+                                <span class="dd-icon">🤖</span>
+                                <div class="dd-text">
+                                    <strong>AI & Automation</strong>
+                                    <span>LLMs & automated agent flows</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Products Dropdown -->
+                    <div class="nav-item-dropdown">
+                        <a href="index.html#products" class="nav-link">
+                            <span>Products</span>
+                            <svg class="dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
+                                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <div class="nav-dropdown-menu">
+                            <a href="index.html#products" class="dropdown-link-item">
+                                <span class="dd-icon">🛍️</span>
+                                <div class="dd-text">
+                                    <strong>N3Shop Suite</strong>
+                                    <span>Modern e-commerce platform</span>
+                                </div>
+                            </a>
+                            <a href="index.html#products" class="dropdown-link-item">
+                                <span class="dd-icon">📊</span>
+                                <div class="dd-text">
+                                    <strong>N3Dash Analytics</strong>
+                                    <span>Real-time business telemetry</span>
+                                </div>
+                            </a>
+                            <a href="index.html#products" class="dropdown-link-item">
+                                <span class="dd-icon">💬</span>
+                                <div class="dd-text">
+                                    <strong>N3Bot AI</strong>
+                                    <span>Smart customer support agent</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <a href="index.html#estimator" class="nav-link">Estimator</a>
+                    <a href="team.html" class="nav-link active" aria-label="N3Rah Leadership & Team">Team</a>
+                    <a href="card.html" class="nav-link" aria-label="N3Rah Digital NFC Card">NFC Card</a>
+                </div>
+
+                <div class="nav-actions-right">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme Dark or Light" title="Toggle theme">
+                        <span class="theme-icon theme-icon-dark">🌙</span>
+                        <span class="theme-icon theme-icon-light">☀️</span>
+                    </button>
+                    <a href="index.html#contact" class="btn-nav-outline" aria-label="Contact Sales">Contact Sales</a>
+                    <a href="index.html#estimator" class="btn-nav-primary" aria-label="Request Technical Proposal">Get Proposal</a>
+                    <a href="admin.html" class="btn-nav-signin" aria-label="Admin Proposal Portal">Admin 🔒</a>
+                </div>
             </nav>
         </div>
     </header>
@@ -560,11 +636,10 @@
                 </div>
                 <div class="footer-col">
                     <h4>Company</h4>
-                    <a href="about.html">About N3Rah</a>
                     <a href="team.html">Leadership & Team</a>
-                    <a href="about.html#process">Our Methodology</a>
                     <a href="index.html#estimator">Cost Estimator</a>
                     <a href="card.html">Digital NFC & QR Card</a>
+                    <a href="admin.html" style="color: var(--accent-light); font-weight: 600;">Admin Proposal Portal 🔒</a>
                     <a href="index.html#contact">Contact Us</a>
                 </div>
             </div>

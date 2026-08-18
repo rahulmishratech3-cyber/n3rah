@@ -3,7 +3,7 @@
    Obsidian Dark Theme | Glassmorphism | Dual-Pane Live Preview | A4 Print
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Mono:wght@400;700&display=swap');
 
 :root {
   --bg-deep: #030712;
@@ -25,8 +25,8 @@
   --red: #ef4444;
 
   --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
 
   --gradient-primary: linear-gradient(135deg, #6366f1, #a855f7);
   --gradient-cyan: linear-gradient(135deg, #06b6d4, #3b82f6);
@@ -42,8 +42,8 @@
   --shadow-glow: 0 0 35px rgba(99, 102, 241, 0.25);
 
   --transition: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-title: 'Space Grotesk', sans-serif;
+  --font: 'Montserrat', 'Plus Jakarta Sans', sans-serif;
+  --font-title: 'Montserrat', 'Outfit', sans-serif;
   --font-mono: 'Space Mono', monospace;
 }
 
@@ -423,6 +423,29 @@ body {
 .view-site-link:hover {
   color: var(--text-primary);
   background: var(--bg-card);
+}
+
+.btn-nav-logout {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #f87171;
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: 0.82rem;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: var(--transition);
+}
+
+.btn-nav-logout:hover {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: #ef4444;
+  color: #ffffff;
+  transform: translateY(-1px);
 }
 
 /* ================= View Container ================= */

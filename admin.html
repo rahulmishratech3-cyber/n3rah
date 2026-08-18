@@ -9,11 +9,17 @@
     <meta name="robots" content="noindex, nofollow" />
     <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
 
+    <!-- Cyber Security & Hardening Meta Tags -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Mono:wght@400;700&display=swap"
         rel="stylesheet" />
 
     <!-- Admin Panel CSS -->
@@ -28,22 +34,22 @@
         <div class="ambient-orb-2"></div>
     </div>
 
-    <!-- ========== AUTH / LOCK SCREEN MODAL ========== -->
+    <!-- ========== AUTH / LOCK SCREEN MODAL (CRYPTOGRAPHIC HASH + BRUTE FORCE PROTECTION) ========== -->
     <div class="lock-screen" id="adminLockScreen">
         <div class="lock-card">
             <div class="lock-logo-wrap">
                 <img src="assets/logo.jpg" alt="N3Rah Logo" />
             </div>
             <h1 class="lock-title">N3Rah Studio Admin</h1>
-            <p class="lock-subtitle">Enter your admin passcode to access the proposal engine</p>
+            <p class="lock-subtitle">Enter your secure passcode to access the proposal engine</p>
 
             <form id="adminLockForm">
                 <div class="pin-input-group">
                     <input type="password" id="adminPinInput" class="pin-input" placeholder="••••••••" autofocus
-                        autocomplete="current-password" required />
-                    <div class="pin-hint">Default Passcode: <code>N3Rah@2803</code></div>
+                        autocomplete="current-password" required maxlength="64" />
+                    <div class="lockout-status" id="lockoutStatus" style="display: none; color: #ef4444; font-size: 0.82rem; margin-top: 8px; font-weight: 600;"></div>
                 </div>
-                <button type="submit" class="lock-btn">Unlock Studio Workspace →</button>
+                <button type="submit" class="lock-btn" id="btnUnlockAdmin">Unlock Studio Workspace →</button>
             </form>
         </div>
     </div>
@@ -91,6 +97,9 @@
                     <a href="index.html" class="view-site-link" target="_blank" title="Open Main Website in new tab">
                         <span>Live Site ↗</span>
                     </a>
+                    <button type="button" class="btn-nav-logout" id="btnAdminLogout" title="Secure Logout & Lock Workspace">
+                        <span>🔒 Logout</span>
+                    </button>
                 </div>
             </div>
         </header>
@@ -488,8 +497,8 @@
                                     <input type="number" class="form-input" id="setDefaultTaxRate" value="0" />
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label" for="setAdminPin">Admin Security PIN</label>
-                                    <input type="text" class="form-input" id="setAdminPin" placeholder="n3rah2026" />
+                                    <label class="form-label" for="setAdminPin">Update Security Passcode</label>
+                                    <input type="password" class="form-input" id="setAdminPin" placeholder="Enter new passcode to update" autocomplete="new-password" />
                                 </div>
                             </div>
 
