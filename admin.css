@@ -1956,20 +1956,27 @@ body {
 }
 
 /* ==========================================================================
-   PRINT STYLESHEET (OPTIMIZED FOR A4 PDF EXPORT)
+   PRINT STYLESHEET (OPTIMIZED FOR CRISP VECTOR A4 PDF EXPORT)
    ========================================================================== */
 @media print {
-  body {
+  html, body {
     background: #ffffff !important;
-    color: #000000 !important;
-    font-size: 12pt;
+    color: #0f172a !important;
+    font-size: 11pt !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
   }
 
   .admin-ambient-bg,
   .admin-navbar,
+  .mobile-pane-tabs,
   .form-panel,
   .preview-toolbar,
   .history-header,
+  .pipeline-stats-grid,
+  .history-filter-bar,
   .history-table-wrapper,
   .settings-grid,
   .lock-screen,
@@ -1980,14 +1987,36 @@ body {
     display: none !important;
   }
 
+  .app-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+  }
+
+  .admin-body {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .view-section {
+    display: none !important;
+  }
+
+  .view-section#view-generator {
+    display: block !important;
+  }
+
   .generator-workspace {
     display: block !important;
     grid-template-columns: 1fr !important;
+    gap: 0 !important;
   }
 
   .preview-panel {
     position: static !important;
     display: block !important;
+    width: 100% !important;
   }
 
   .document-canvas-wrapper {
@@ -1995,44 +2024,73 @@ body {
     overflow: visible !important;
     border: none !important;
     padding: 0 !important;
+    margin: 0 !important;
     background: transparent !important;
   }
 
   .proforma-document {
     box-shadow: none !important;
     border-radius: 0 !important;
+    border: none !important;
     padding: 0 !important;
     margin: 0 !important;
     min-height: auto !important;
     width: 100% !important;
+    max-width: 100% !important;
+    color: #0f172a !important;
+    background: #ffffff !important;
+  }
+
+  .doc-header,
+  .doc-parties-grid,
+  .doc-project-banner,
+  .doc-table-wrapper,
+  .doc-totals-grid,
+  .doc-bank-box,
+  .doc-terms-box,
+  .doc-signatures-grid {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .doc-table tr {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
   }
 
   .doc-parties-grid,
   .doc-table-wrapper,
   .doc-milestones-box,
   .doc-bank-box {
-    border-color: #cbd5e1 !important;
+    border: 1px solid #cbd5e1 !important;
     background: #f8fafc !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
   .doc-type-badge {
     background: #4f46e5 !important;
     color: #ffffff !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
   .doc-project-banner {
     background: #f1f5f9 !important;
-    border-left-color: #4f46e5 !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    border-left: 4px solid #4f46e5 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .sign-stamp {
+    border-color: #10b981 !important;
+    color: #10b981 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
   @page {
     size: A4 portrait;
-    margin: 15mm 15mm 15mm 15mm;
+    margin: 12mm 12mm 12mm 12mm;
   }
 }

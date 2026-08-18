@@ -180,9 +180,8 @@
     // Strip inline event handlers like onload, onerror, onclick, etc.
     val = val.replace(/\bon\w+\s*=/gi, 'data-blocked=');
 
-    // HTML Entity encode special characters
+    // Escape dangerous tags and characters safely
     return val
-      .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
@@ -997,51 +996,228 @@
   }
 
   // ==========================================
-  // 9. EXPORT & SHARING ACTIONS
+  // 9. EXPORT & SHARING ACTIONS (ULTRA-CLEAN A4 PDF)
   // ==========================================
-  async function downloadPDF() {
-    const element = document.getElementById('printableProforma');
-    if (!element) {
-      showToast('Document not loaded yet.');
-      return;
-    }
-
+  function buildCleanPDFContainer() {
     const q = appState.currentQuotation;
-    const clientSafe = (q.clientName || 'Client').replace(/[^a-zA-Z0-9]/g, '_');
-    const fileName = `N3Rah-Proposal-${q.id || 'Draft'}-${clientSafe}.pdf`;
+    const s = appState.settings;
+    const fin = calculateFinancials();
+    const curr = q.currency;
 
-    showToast('Generating official A4 PDF document... ⏳');
+    let itemsHtml = '';
+    q.items.forEach((it, idx) => {
+      itemsHtml += `
+        <tr style="border-bottom: 1px solid #e2e8f0; page-break-inside: avoid; break-inside: avoid;">
+          <td style="padding: 10px 12px; font-family: 'Space Mono', monospace; font-weight: 700; color: #4f46e5; font-size: 11.5px; vertical-align: top; width: 35px;">${String(idx + 1).padStart(2, '0')}</td>
+          <td style="padding: 10px 12px; vertical-align: top;">
+            <div style="font-weight: 700; color: #0f172a; font-size: 13px; margin-bottom: 3px; font-family: 'Montserrat', sans-serif;">${sanitize(it.title)}</div>
+            <div style="font-size: 11px; color: #475569; line-height: 1.45; font-family: 'Montserrat', sans-serif;">${sanitize(it.desc)}</div>
+          </td>
+          <td style="padding: 10px 12px; text-align: right; font-family: 'Space Mono', monospace; font-weight: 700; color: #0f172a; font-size: 12.5px; white-space: nowrap; vertical-align: top; width: 130px;">${formatMoney(it.amount, curr)}</td>
+        </tr>
+      `;
+    });
 
-    if (window.html2pdf) {
-      const opt = {
-        margin: [10, 10, 10, 10], // mm
-        filename: fileName,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: {
-          scale: 2,
-          useCORS: true,
-          logging: false,
-          scrollY: 0,
-          windowWidth: 860
-        },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-      };
+    let milestonesHtml = '';
+    fin.milestones.forEach((m) => {
+      milestonesHtml += `
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px dashed #cbd5e1; font-size: 11.5px; font-family: 'Montserrat', sans-serif;">
+          <span style="font-weight: 600; color: #334155;">${sanitize(m.name)}</span>
+          <span style="font-family: 'Space Mono', monospace; font-weight: 700; color: #0f172a;">${formatMoney(m.amount, curr)}</span>
+        </div>
+      `;
+    });
 
-      try {
-        await html2pdf().set(opt).from(element).save();
-        showToast('PDF downloaded successfully! 📄✓');
-        return;
-      } catch (err) {
-        console.warn('html2pdf direct render fallback to print', err);
-      }
-    }
+    let termsHtml = '';
+    const termsToRender = (s.defaultTerms && s.defaultTerms.length > 0) ? s.defaultTerms : DEFAULT_SETTINGS.defaultTerms;
+    termsToRender.forEach((t) => {
+      termsHtml += `<li style="margin-bottom: 3px; line-height: 1.4;">${sanitize(t)}</li>`;
+    });
 
-    // Fallback to system print if CDN blocked or fails
-    window.print();
+    const wrapper = document.createElement('div');
+    wrapper.id = 'pdfExportRenderRoot';
+    wrapper.style.width = '750px';
+    wrapper.style.minWidth = '750px';
+    wrapper.style.maxWidth = '750px';
+    wrapper.style.padding = '28px 32px';
+    wrapper.style.background = '#ffffff';
+    wrapper.style.color = '#0f172a';
+    wrapper.style.fontFamily = "'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif";
+    wrapper.style.fontSize = '12px';
+    wrapper.style.lineHeight = '1.45';
+    wrapper.style.boxSizing = 'border-box';
+    wrapper.style.margin = '0 auto';
+
+    wrapper.innerHTML = `
+      <!-- Header -->
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 14px; border-bottom: 2px solid #e2e8f0; margin-bottom: 14px; page-break-inside: avoid; break-inside: avoid;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <img src="assets/logo.jpg" alt="Logo" style="width: 48px; height: 48px; border-radius: 8px; border: 1px solid #cbd5e1; object-fit: cover;" />
+          <div>
+            <div style="font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 900; color: #0f172a; letter-spacing: -0.5px; text-transform: uppercase;">
+              N<span style="color: #6366f1;">3</span>Rah <span style="font-size: 10px; background: rgba(6,182,212,0.12); color: #0891b2; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(6,182,212,0.3); vertical-align: middle;">TECH</span>
+            </div>
+            <div style="font-size: 8px; font-weight: 700; color: #d97706; letter-spacing: 0.8px; text-transform: uppercase; margin-top: 2px;">
+              ${sanitize(s.tagline)}
+            </div>
+          </div>
+        </div>
+        <div style="text-align: right;">
+          <span style="display: inline-block; background: #4f46e5; color: #ffffff; font-weight: 700; font-size: 9.5px; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 3px;">
+            PROFORMA INVOICE & PROPOSAL
+          </span>
+          <div style="font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; color: #1e293b;">REF: ${sanitize(q.id)}</div>
+          <div style="font-size: 10.5px; color: #64748b; margin-top: 1px;">Date: <strong>${formatDateDisplay(q.date)}</strong></div>
+          <div style="font-size: 10.5px; color: #64748b;">Valid Through: <strong>${formatDateDisplay(q.validUntil)}</strong></div>
+        </div>
+      </div>
+
+      <!-- Parties Grid -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 14px; margin-bottom: 14px; page-break-inside: avoid; break-inside: avoid;">
+        <div>
+          <div style="font-size: 9.5px; font-weight: 800; color: #4f46e5; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">ISSUED BY (STUDIO):</div>
+          <div style="font-weight: 800; font-size: 12px; color: #0f172a;">${sanitize(s.companyName)}</div>
+          <div style="font-size: 10.5px; color: #334155; margin-top: 1px;">${sanitize(s.founderName)} – ${sanitize(s.role)}</div>
+          <div style="font-size: 10.5px; color: #64748b;">Email: ${sanitize(s.email)}</div>
+          <div style="font-size: 10.5px; color: #64748b;">Phone: ${sanitize(s.phone)}</div>
+          <div style="font-size: 10.5px; color: #64748b;">Web: ${sanitize(s.website)}</div>
+        </div>
+        <div>
+          <div style="font-size: 9.5px; font-weight: 800; color: #4f46e5; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">PREPARED FOR (CLIENT):</div>
+          <div style="font-weight: 800; font-size: 12px; color: #0f172a;">${sanitize(q.clientName || 'Client Name')}</div>
+          <div style="font-size: 10.5px; color: #334155; font-weight: 600; margin-top: 1px;">${sanitize(q.clientCompany || 'Company / Individual')}</div>
+          <div style="font-size: 10.5px; color: #64748b;">Email: ${sanitize(q.clientEmail || 'N/A')}</div>
+          <div style="font-size: 10.5px; color: #64748b;">Phone: ${sanitize(q.clientPhone || 'N/A')}</div>
+          <div style="font-size: 10.5px; color: #64748b;">Location: ${sanitize(q.clientAddress || 'Global')}</div>
+        </div>
+      </div>
+
+      <!-- Project Overview Banner -->
+      <div style="background: #f1f5f9; border-left: 4px solid #4f46e5; border-radius: 0 6px 6px 0; padding: 10px 12px; margin-bottom: 14px; page-break-inside: avoid; break-inside: avoid;">
+        <div style="font-weight: 800; font-size: 12px; color: #0f172a; margin-bottom: 2px;">Project: ${sanitize(q.projectName || 'Custom Software Build')}</div>
+        <div style="font-size: 10.5px; color: #475569; line-height: 1.4;">${sanitize(q.projectOverview || 'Technical engineering scope and deliverable architecture specification.')}</div>
+      </div>
+
+      <!-- Deliverables Table -->
+      <div style="border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden; margin-bottom: 14px; page-break-inside: avoid; break-inside: avoid;">
+        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+          <thead>
+            <tr style="background: #f8fafc; border-bottom: 1.5px solid #cbd5e1;">
+              <th style="padding: 7px 10px; font-size: 9.5px; font-weight: 800; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; width: 35px;">#</th>
+              <th style="padding: 7px 10px; font-size: 9.5px; font-weight: 800; color: #475569; text-transform: uppercase; letter-spacing: 0.5px;">TECHNICAL SCOPE & DELIVERABLE SPECIFICATION</th>
+              <th style="padding: 7px 10px; font-size: 9.5px; font-weight: 800; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; text-align: right; width: 120px;">INVESTMENT</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${itemsHtml}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Totals & Milestones Grid -->
+      <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 12px; margin-bottom: 14px; page-break-inside: avoid; break-inside: avoid;">
+        <!-- Milestones -->
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px 12px;">
+          <div style="font-size: 9.5px; font-weight: 800; color: #4f46e5; text-transform: uppercase; margin-bottom: 5px;">
+            📅 Proposed Milestone Payment Schedule
+          </div>
+          ${milestonesHtml}
+        </div>
+
+        <!-- Financial Summary -->
+        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 10px 12px;">
+          <div style="display: flex; justify-content: space-between; font-size: 10.5px; color: #475569; margin-bottom: 3px;">
+            <span>Scope Subtotal:</span>
+            <strong style="color: #0f172a; font-family: 'Space Mono', monospace;">${formatMoney(fin.subtotal, curr)}</strong>
+          </div>
+          ${fin.discount > 0 ? `
+            <div style="display: flex; justify-content: space-between; font-size: 10.5px; color: #10b981; margin-bottom: 3px;">
+              <span>Courtesy Discount:</span>
+              <strong style="font-family: 'Space Mono', monospace;">-${formatMoney(fin.discount, curr)}</strong>
+            </div>
+          ` : ''}
+          ${fin.taxRate > 0 ? `
+            <div style="display: flex; justify-content: space-between; font-size: 10.5px; color: #475569; margin-bottom: 3px;">
+              <span>Tax / GST (${fin.taxRate}%):</span>
+              <strong style="font-family: 'Space Mono', monospace;">+${formatMoney(fin.taxAmount, curr)}</strong>
+            </div>
+          ` : ''}
+          <div style="border-top: 1.5px solid #0f172a; margin-top: 5px; padding-top: 5px; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-weight: 800; font-size: 11.5px; color: #0f172a;">Total Investment:</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 900; color: #4f46e5;">${formatMoney(fin.grandTotal, curr)}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bank & Payment Info -->
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px 12px; margin-bottom: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; page-break-inside: avoid; break-inside: avoid;">
+        <div>
+          <div style="font-size: 9px; font-weight: 800; color: #4f46e5; text-transform: uppercase; margin-bottom: 3px;">🏦 Bank Wire / Transfer:</div>
+          <div style="font-size: 10px; color: #334155;">Beneficiary: <strong>${sanitize(s.accountName)}</strong></div>
+          <div style="font-size: 10px; color: #334155;">Bank: <strong>${sanitize(s.bankName)}</strong></div>
+          <div style="font-size: 10px; color: #334155;">Account No: <strong style="font-family: 'Space Mono', monospace;">${sanitize(s.accountNumber)}</strong></div>
+          <div style="font-size: 10px; color: #334155;">IFSC: <strong style="font-family: 'Space Mono', monospace;">${sanitize(s.ifscCode)}</strong></div>
+        </div>
+        <div>
+          <div style="font-size: 9px; font-weight: 800; color: #4f46e5; text-transform: uppercase; margin-bottom: 3px;">⚡ Instant Remittance / UPI:</div>
+          <div style="font-size: 10px; color: #334155;">UPI ID: <strong style="font-family: 'Space Mono', monospace; color: #4f46e5;">${sanitize(s.upiId)}</strong></div>
+          <div style="font-size: 10px; color: #334155;">Tax ID: <strong>${sanitize(s.taxId)}</strong></div>
+          <div style="font-size: 10px; color: #334155;">Payment Ref: <strong style="font-family: 'Space Mono', monospace;">${sanitize(q.id)}</strong></div>
+        </div>
+      </div>
+
+      <!-- Terms & Signatures -->
+      <div style="border-top: 1.5px solid #e2e8f0; padding-top: 8px; font-size: 9.5px; color: #64748b; page-break-inside: avoid; break-inside: avoid;">
+        <div style="font-weight: 800; font-size: 9.5px; color: #334155; text-transform: uppercase; margin-bottom: 2px;">Standard Terms & SLA Warranty:</div>
+        <ul style="margin: 0 0 10px 14px; padding: 0;">
+          ${termsHtml}
+        </ul>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding-top: 4px; page-break-inside: avoid; break-inside: avoid;">
+          <div>
+            <div style="font-weight: 800; font-size: 11px; color: #0f172a;">${sanitize(s.founderName)}</div>
+            <div style="font-size: 9.5px; color: #64748b;">${sanitize(s.role)} – ${sanitize(s.companyName)}</div>
+            <div style="margin-top: 2px;"><span style="border: 1px solid #10b981; color: #10b981; padding: 1px 4px; border-radius: 3px; font-size: 8px; font-weight: 700; text-transform: uppercase;">Verified Partner ✓</span></div>
+            <div style="border-top: 1px dashed #94a3b8; margin-top: 18px; padding-top: 3px; font-size: 9px; color: #64748b;">Authorized Studio Signoff</div>
+          </div>
+          <div>
+            <div style="font-weight: 800; font-size: 11px; color: #0f172a;">${sanitize(q.clientName || 'Client Representative')}</div>
+            <div style="font-size: 9.5px; color: #64748b;">${sanitize(q.clientCompany || 'Client Acceptance')}</div>
+            <div style="height: 12px;"></div>
+            <div style="border-top: 1px dashed #94a3b8; margin-top: 18px; padding-top: 3px; font-size: 9px; color: #64748b;">Client Acceptance Signature & Date</div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    return wrapper;
+  }
+
+  function downloadPDF() {
+    triggerPrint();
   }
 
   function triggerPrint() {
-    window.print();
+    const q = appState.currentQuotation;
+    const clientSafe = (q.clientName || 'Client').replace(/[^a-zA-Z0-9]/g, '_');
+    const prevTitle = document.title;
+    document.title = `N3Rah-Proposal-${q.id || 'Draft'}-${clientSafe}`;
+
+    // Ensure generator tab is active
+    switchTab('generator');
+
+    // Ensure document preview is active on mobile workspace
+    const ws = document.getElementById('generatorWorkspace');
+    if (ws) ws.classList.remove('show-form-only');
+
+    showToast('Opening native vector A4 PDF export... 📄');
+
+    setTimeout(() => {
+      window.print();
+      setTimeout(() => {
+        document.title = prevTitle;
+      }, 1500);
+    }, 120);
   }
 
   function copyWhatsAppPitch() {
