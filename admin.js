@@ -608,6 +608,26 @@
     }
   }
 
+  function autoSaveQuotation() {
+    if (!appState.currentQuotation || !appState.currentQuotation.id) return;
+    const q = JSON.parse(JSON.stringify(appState.currentQuotation));
+
+    try {
+      localStorage.setItem('n3rah_admin_current_draft', JSON.stringify(q));
+    } catch (e) {}
+
+    // Auto-sync into history pipeline
+    const existingIndex = appState.savedQuotations.findIndex((item) => item.id === q.id);
+    if (existingIndex >= 0) {
+      appState.savedQuotations[existingIndex] = q;
+    } else {
+      appState.savedQuotations.unshift(q);
+    }
+
+    saveQuotationsToStorage();
+    updateHistoryStats();
+  }
+
   // ==========================================
   // 6. TEMPLATE & AMOUNT ENGINE
   // ==========================================
@@ -820,6 +840,8 @@
   // 8. PROFORMA DOCUMENT PREVIEW RENDERER (SANITIZED)
   // ==========================================
   function renderDocumentPreview() {
+    autoSaveQuotation();
+
     const container = document.getElementById('proformaDocRender');
     if (!container) return;
 
@@ -1333,19 +1355,10 @@ Website: ${s.website}`;
   }
 
   function saveCurrentQuotation() {
-    const q = Object.assign({}, appState.currentQuotation);
-    const existingIndex = appState.savedQuotations.findIndex((item) => item.id === q.id);
-
-    if (existingIndex >= 0) {
-      appState.savedQuotations[existingIndex] = q;
-    } else {
-      appState.savedQuotations.unshift(q);
-    }
-
-    saveQuotationsToStorage();
+    autoSaveQuotation();
     renderHistoryTable();
     updateHistoryStats();
-    showToast(`Quotation ${q.id} saved to pipeline! ✓`);
+    showToast(`Quotation ${appState.currentQuotation.id} saved to pipeline! ✓`);
   }
 
   function createNewQuotation() {
@@ -1372,8 +1385,11 @@ Website: ${s.website}`;
     };
 
     applyTemplate('web', false);
+    autoSaveQuotation();
+    renderFormInputs();
+    renderDocumentPreview();
     switchTab('generator');
-    showToast('New blank quotation initialized.');
+    showToast('New blank quotation initialized & added to history.');
   }
 
   function loadQuotationById(id) {
@@ -1381,6 +1397,9 @@ Website: ${s.website}`;
     if (!found) return;
 
     appState.currentQuotation = JSON.parse(JSON.stringify(found));
+    try {
+      localStorage.setItem('n3rah_admin_current_draft', JSON.stringify(appState.currentQuotation));
+    } catch (e) {}
     renderFormInputs();
     renderDocumentPreview();
     updateTemplateActiveUI(appState.currentQuotation.selectedTemplate);
@@ -1824,7 +1843,29 @@ Website: ${s.website}`;
     if (quoteId) {
       loadQuotationById(sanitize(quoteId));
     } else {
-      applyTemplate('web', false);
+      // 1. Check if there's a saved active draft
+      const savedDraft = localStorage.getItem('n3rah_admin_current_draft');
+      let loaded = false;
+      if (savedDraft) {
+        try {
+          const parsed = secureJSONParse(savedDraft);
+          if (parsed && parsed.id) {
+            appState.currentQuotation = parsed;
+            loaded = true;
+          }
+        } catch (e) {}
+      }
+
+      // 2. If no active draft, load latest from history
+      if (!loaded && appState.savedQuotations && appState.savedQuotations.length > 0) {
+        appState.currentQuotation = JSON.parse(JSON.stringify(appState.savedQuotations[0]));
+        loaded = true;
+      }
+
+      // 3. Fallback to default template
+      if (!loaded) {
+        applyTemplate('web', false);
+      }
     }
 
     renderFormInputs();
